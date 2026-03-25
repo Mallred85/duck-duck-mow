@@ -8,7 +8,7 @@
  * No tRPC, no database dependency — fully decoupled.
  */
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const NEIGHBORHOODS = ['Herriman', 'Riverton', 'South Jordan', 'Bluffdale'] as const;
 const SERVICES      = ['Lawn Mowing', 'Edging', 'Trimming', 'Blowing', 'Seasonal Cleanup'] as const;
