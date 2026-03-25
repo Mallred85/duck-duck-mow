@@ -18,7 +18,7 @@ export const site = {
 
   /** Fallback meta description */
   defaultDescription:
-    'Family-owned lawn care in Herriman, Riverton, South Jordan & Bluffdale, UT. Mowing, edging, trimming & seasonal cleanup. Free quotes — text 801-669-3819.',
+    'Family-owned lawn care in Herriman, Riverton, South Jordan & Bluffdale, UT. Mowing, edging, trimming & seasonal cleanup. Free quotes, text 801-669-3819.',
 
   /** Default Open Graph image (absolute URL) */
   defaultOgImage: 'https://duckduckmow.com/og-default.jpg',
