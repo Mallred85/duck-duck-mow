@@ -71,7 +71,14 @@ interface QuotePayload {
 
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
-    const origin = env.ALLOWED_ORIGIN ?? 'https://duckduckmow.com';
+    const allowedOrigins = [
+      env.ALLOWED_ORIGIN ?? 'https://duckduckmow.com',
+      'https://duckduckmow.com',
+      'https://www.duckduckmow.com',
+      'https://duck-duck-mow.pages.dev',
+    ];
+    const requestOrigin = request.headers.get('Origin') ?? '';
+    const origin = allowedOrigins.includes(requestOrigin) ? requestOrigin : allowedOrigins[0];
 
     const corsHeaders: Record<string, string> = {
       'Access-Control-Allow-Origin':  origin,
@@ -186,7 +193,7 @@ async function sendEmail(apiKey: string, d: QuotePayload): Promise<void> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from:     'Duck Duck Mow <quotes@duckduckmow.com>',
+      from:     'Duck Duck Mow <quotes@email.duckduckmow.com>',
       to:       ['info@duckduckmow.com'],
       reply_to: d.email,
       subject:  `New Quote — ${d.name} (${d.neighborhood})`,
