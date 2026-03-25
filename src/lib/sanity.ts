@@ -44,7 +44,8 @@ export interface SanityPost {
   readTime: number;
   city: string;
   author: string;
-  body?: string;
+  body?: any[];
+  coverImage?: { asset: { url: string }; alt?: string };
 }
 
 // ── REVIEWS ──────────────────────────────────────────────────
@@ -113,7 +114,8 @@ export async function getAllPosts(): Promise<SanityPost[]> {
       category,
       readTime,
       city,
-      author
+      author,
+      "coverImage": coverImage { alt, "asset": asset->{ url } }
     }`
   );
 }
@@ -131,7 +133,8 @@ export async function getPostBySlug(slug: string): Promise<SanityPost | null> {
       readTime,
       city,
       author,
-      body
+      body,
+      "coverImage": coverImage { alt, "asset": asset->{ url } }
     }`,
     { slug }
   );
