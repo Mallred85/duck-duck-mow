@@ -2,6 +2,7 @@
   "name": "ddm-quote-form",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "npm@10.9.2",
   "scripts": {
     "dev":    "wrangler dev",
     "deploy": "wrangler deploy"
