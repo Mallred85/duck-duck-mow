@@ -23,42 +23,46 @@ const areas = [
 ];
 ---
 
-<section id="areas" class="py-20 sm:py-28 bg-white">
-  <div class="container mx-auto px-4">
+<section id="areas" class="py-20 sm:py-28 relative overflow-hidden" style="background-color: #052e16;">
+  <!-- Sunbeam rays -->
+  <div class="absolute inset-0 pointer-events-none" style="background-image: repeating-conic-gradient(from 0deg at 50% -10%, rgba(255,255,255,0.035) 0deg 9deg, transparent 9deg 18deg);"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.07) 0%, transparent 65%);"></div>
+
+  <div class="relative z-10 container mx-auto px-4">
     <div class="text-center mb-16 fade-in">
-      <span class="inline-block px-4 py-1.5 bg-green-50 text-green-600 text-sm font-semibold rounded-full mb-4">
-        Where We Work
+      <span class="inline-block px-4 py-1.5 bg-white/10 border border-white/20 text-white text-sm font-semibold rounded-full mb-4">
+        Where We Serve
       </span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 font-display">
-        Serving <span class="text-green-600">Your Community</span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 font-display">
+        Proudly Serving <span class="text-green-400">Your Neighborhood</span>
       </h2>
-      <p class="text-lg text-gray-500 max-w-xl mx-auto">
-        We focus on four communities in the Salt Lake Valley so we can give every lawn the attention it deserves.
+      <p class="text-lg text-white/70 max-w-xl mx-auto">
+        We focus on four great communities in South Salt Lake County, giving each neighborhood the attention it deserves.
       </p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       {areas.map(({ city, desc, zip }) => (
-        <div class="fade-in group text-center p-8 rounded-2xl border border-gray-100 hover:border-green-200 hover:shadow-lg hover:shadow-green-500/5 transition-all">
-          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-green-50 flex items-center justify-center group-hover:bg-green-100 transition-colors">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <div class="fade-in group text-center p-8 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition-all">
+          <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
+            <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
               />
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
             </svg>
           </div>
-          <h3 class="text-xl font-extrabold text-gray-900 mb-2">{city}</h3>
-          <p class="text-xs text-green-600 font-semibold mb-3">{city}, UT {zip}</p>
-          <p class="text-gray-500 text-sm leading-relaxed">{desc}</p>
+          <h3 class="text-xl font-extrabold text-white mb-1">{city}</h3>
+          <p class="text-xs text-green-400 font-semibold mb-3">Utah</p>
+          <p class="text-white/60 text-sm leading-relaxed">{desc}</p>
         </div>
       ))}
     </div>
 
     <div class="text-center mt-12 fade-in">
-      <p class="text-gray-500 text-sm">
+      <p class="text-white/60 text-sm">
         Not sure if we serve your neighborhood?{' '}
-        <a href="#contact" class="text-green-600 font-semibold hover:underline">
+        <a href="#contact" class="text-green-400 font-semibold hover:text-green-300 transition-colors">
           Send us a message
         </a>{' '}
         and we'll let you know right away.
