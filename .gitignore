@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+worker/node_modules/
+
+# Build output
+dist/
+worker/dist/
+
+# Astro
+.astro/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Wrangler
+.wrangler/
