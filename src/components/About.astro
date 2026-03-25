@@ -1,6 +1,12 @@
 ---
 const BEAUTIFUL_LAWN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663369857976/gh22GidGuqNYiudTF7cxqY/beautiful-lawn_089b2364.jpg";
 
+const stats = [
+  { value: '5+', label: 'Years' },
+  { value: '4',  label: 'Cities' },
+  { value: '100%', label: 'Family-Run' },
+];
+
 const values = [
   { label: 'Consistency', desc: 'Same brothers, same day, every week. You\'ll always know who\'s showing up.' },
   { label: 'Detail-Oriented', desc: 'We edge, trim, and blow every single visit. A great mow isn\'t done until the driveway is clean.' },
@@ -29,10 +35,10 @@ const values = [
             <div class="absolute bottom-6 left-6 right-6">
               <div class="flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-xl px-5 py-3">
                 <div class="w-12 h-12 rounded-full bg-green-600 flex items-center justify-center flex-shrink-0">
+                  <!-- Family / two-person icon -->
                   <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                    />
+                      d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197"/>
                   </svg>
                 </div>
                 <div>
@@ -51,19 +57,30 @@ const values = [
           Our Story
         </span>
         <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-6 font-display leading-tight">
-          Neighbors Caring for <span class="text-green-600">Neighbors' Lawns</span>
+          Brothers on a <span class="text-green-600">Mission</span>
         </h2>
-        <p class="text-lg text-gray-500 leading-relaxed mb-6">
-          We're brothers who grew up in this community and started mowing lawns because we
-          genuinely love the work and the results. Since 2020 we've been building a reputation
-          for showing up on time, doing excellent work, and treating every yard like it's our own.
+        <p class="text-lg text-gray-500 leading-relaxed mb-4">
+          Duck Duck Mow started as a simple idea between brothers: take care of our neighbors'
+          lawns the way we'd want ours taken care of. Five years later, that idea has grown into
+          a trusted local business.
         </p>
-        <p class="text-gray-500 leading-relaxed mb-8">
-          We're not a big corporation. We're your neighbors. And that means we care about the
-          quality of our work in a way that only a family business can.
+        <p class="text-gray-500 leading-relaxed mb-6">
+          We're not a big corporation. We're your neighbors. We show up on time, do the job
+          right, and treat every yard like it's our own.
         </p>
 
-        <div class="space-y-4">
+        <!-- Stats row -->
+        <div class="grid grid-cols-3 gap-4 mb-8">
+          {stats.map(({ value, label }) => (
+            <div class="text-center border border-gray-200 rounded-xl py-4">
+              <p class="text-2xl font-extrabold text-green-600">{value}</p>
+              <p class="text-sm text-gray-500 mt-0.5">{label}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Values -->
+        <div class="space-y-4 mb-8">
           {values.map(({ label, desc }) => (
             <div class="flex gap-4">
               <div class="w-8 h-8 rounded-lg bg-green-100 flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -78,6 +95,13 @@ const values = [
             </div>
           ))}
         </div>
+
+        <a href="#quote" class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3 rounded-full transition-colors">
+          Get Your Free Quote
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
       </div>
 
     </div>

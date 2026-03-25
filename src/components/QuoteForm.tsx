@@ -299,7 +299,7 @@ export default function QuoteForm({ endpoint, showPlanSelector = false }: Props)
       </button>
 
       <p className="text-center text-xs text-gray-400">
-        We'll reach out at{' '}
+        We'll reach out to{' '}
         <span className="font-medium">{form.email || 'your email'}</span>{' '}
         and may also call or text your phone.
       </p>

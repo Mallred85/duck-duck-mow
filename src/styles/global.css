@@ -23,6 +23,7 @@
     font-family: 'Poppins', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 18px;
   }
 
   /* Playfair Display for headings via .font-display utility */
