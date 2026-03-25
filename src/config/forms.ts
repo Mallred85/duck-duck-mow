@@ -17,5 +17,5 @@ export const forms = {
    */
   quoteEndpoint:
     import.meta.env.PUBLIC_QUOTE_FORM_ENDPOINT ??
-    'https://ddm-quote-form.YOUR_ACCOUNT.workers.dev',
+    'https://ddm-quote-form.marcallred.workers.dev',
 } as const;
