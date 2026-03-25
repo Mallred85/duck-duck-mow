@@ -1,8 +1,11 @@
 ---
 const BEAUTIFUL_LAWN = "https://d2xsxph8kpxj0f.cloudfront.net/310519663369857976/gh22GidGuqNYiudTF7cxqY/beautiful-lawn_089b2364.jpg";
 
+const FOUNDED = 2020;
+const yearsInService = new Date().getFullYear() - FOUNDED;
+
 const stats = [
-  { value: '5+', label: 'Years' },
+  { value: `${yearsInService}+`, label: 'Years' },
   { value: '4',  label: 'Cities' },
   { value: '100%', label: 'Family-Run' },
 ];
