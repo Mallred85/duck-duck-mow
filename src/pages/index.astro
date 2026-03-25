@@ -1,0 +1,83 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Hero from '@/components/Hero.astro';
+import Services from '@/components/Services.astro';
+import About from '@/components/About.astro';
+import Reviews from '@/components/Reviews.astro';
+import ServiceAreas from '@/components/ServiceAreas.astro';
+import FAQ, { faqs } from '@/components/FAQ.astro';
+import Footer from '@/components/Footer.astro';
+import QuoteForm from '@/components/QuoteForm.tsx';
+import { forms } from '@/config/forms';
+import { PHONE_DISPLAY, PHONE_HREF } from '@/config/site';
+
+// FAQ schema for this page
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ question, answer }) => ({
+    '@type': 'Question',
+    name: question,
+    acceptedAnswer: { '@type': 'Answer', text: answer },
+  })),
+};
+---
+
+<BaseLayout
+  title="Duck Duck Mow | Professional Lawn Care in Herriman, Riverton, South Jordan & Bluffdale"
+  noSuffix
+  description="Family-owned lawn care in Herriman, Riverton, South Jordan & Bluffdale, UT. Mowing, edging, trimming & seasonal cleanup. Free quotes — text 801-669-3819."
+  keywords="lawn care Herriman, lawn mowing Riverton, South Jordan lawn service, Bluffdale yard care, Utah lawn mowing, seasonal cleanup Utah"
+  schema={faqSchema}
+>
+  <Nav currentPage="home" />
+  <main>
+    <Hero />
+    <Services />
+    <About />
+    <Reviews />
+    <ServiceAreas />
+
+    <!-- Quote Form Section -->
+    <section id="contact" class="py-20 sm:py-28 bg-gradient-to-b from-white to-green-50/30">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="text-center mb-12 fade-in">
+          <span class="inline-block px-4 py-1.5 bg-green-50 text-green-600 text-sm font-semibold rounded-full mb-4">
+            Free Quote
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 font-display">
+            Get Your <span class="text-green-600">Free Quote</span>
+          </h2>
+          <p class="text-gray-500 text-lg">
+            Fill out the form below and we'll get back to you fast — usually same day.
+          </p>
+        </div>
+        <div class="fade-in">
+          <QuoteForm endpoint={forms.quoteEndpoint} client:load />
+        </div>
+      </div>
+    </section>
+
+    <FAQ />
+
+    <!-- Bottom CTA -->
+    <section class="py-14 bg-gradient-to-br from-green-600 to-emerald-700 text-white text-center relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 30% 50%, white 1px, transparent 1px), radial-gradient(circle at 70% 80%, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+      <div class="container mx-auto px-4 relative z-10 fade-in">
+        <p class="text-white/80 text-lg font-medium mb-4">Prefer to talk? We're always available.</p>
+        <a
+          href={PHONE_HREF}
+          class="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-green-600 font-bold rounded-full hover:bg-green-50 transition-all shadow-2xl hover:scale-105 text-xl"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z"
+            />
+          </svg>
+          Call or Text {PHONE_DISPLAY}
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>

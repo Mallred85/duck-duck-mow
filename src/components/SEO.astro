@@ -1,0 +1,177 @@
+---
+/**
+ * SEO.astro
+ * ─────────────────────────────────────────────────────────────
+ * Drop-in SEO head component. Handles:
+ *   - <title> with configurable suffix
+ *   - meta description, keywords, robots
+ *   - Canonical URL (auto-computed or overridden)
+ *   - Open Graph (og:*) for all social platforms
+ *   - Twitter Card
+ *   - Schema.org JSON-LD (@graph): WebPage + BreadcrumbList +
+ *     LocalBusiness (homepage only) + custom schema passthrough
+ *   - Geo tags for local SEO
+ *   - Custom meta passthrough
+ * ─────────────────────────────────────────────────────────────
+ */
+import { site } from '@/config/site';
+
+export interface Props {
+  title?: string;
+  noSuffix?: boolean;
+  description?: string;
+  keywords?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogImageAlt?: string;
+  ogType?: 'website' | 'article' | 'product';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  noIndex?: boolean;
+  breadcrumbs?: Array<{ name: string; url: string }>;
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  customMeta?: Array<{ name?: string; property?: string; content: string }>;
+}
+
+const {
+  title,
+  noSuffix = false,
+  description = site.defaultDescription,
+  keywords,
+  canonical,
+  ogImage = site.defaultOgImage,
+  ogImageAlt = site.business.name,
+  ogType = 'website',
+  publishedTime,
+  modifiedTime,
+  author = site.business.name,
+  noIndex = false,
+  breadcrumbs = [],
+  schema,
+  customMeta = [],
+} = Astro.props;
+
+const pageTitle = title
+  ? noSuffix ? title : `${title}${site.titleSuffix}`
+  : site.defaultTitle;
+
+const canonicalUrl = canonical ?? new URL(Astro.url.pathname, site.url).href;
+const robotsContent = noIndex ? 'noindex, nofollow' : 'index, follow';
+
+// ── Schema.org @graph ─────────────────────────────────────
+const schemaItems: Record<string, unknown>[] = [];
+
+// WebPage on every page
+schemaItems.push({
+  '@type': 'WebPage',
+  '@id': canonicalUrl,
+  url: canonicalUrl,
+  name: pageTitle,
+  description,
+  inLanguage: site.defaultLang,
+  isPartOf: { '@id': `${site.url}/#website` },
+  ...(publishedTime ? { datePublished: publishedTime } : {}),
+  ...(modifiedTime  ? { dateModified:  modifiedTime  } : {}),
+});
+
+// BreadcrumbList when provided
+if (breadcrumbs.length > 0) {
+  schemaItems.push({
+    '@type': 'BreadcrumbList',
+    itemListElement: breadcrumbs.map((crumb, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      name: crumb.name,
+      item: crumb.url,
+    })),
+  });
+}
+
+// LocalBusiness — homepage only
+if (Astro.url.pathname === '/') {
+  schemaItems.push({
+    '@type': 'LocalBusiness',
+    '@id': `${site.url}/#business`,
+    name: site.business.name,
+    description: site.business.description,
+    url: site.business.url,
+    logo: site.business.logo,
+    telephone: site.business.telephone,
+    email: site.business.email,
+    address: {
+      '@type': 'PostalAddress',
+      ...site.business.address,
+    },
+    priceRange: site.business.priceRange,
+    areaServed: site.business.areaServed.map((area) => {
+      const [city, region] = area.split(' ');
+      return { '@type': 'City', name: city, containedInPlace: { '@type': 'State', name: 'Utah' } };
+    }),
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: 'Lawn Care Services',
+      itemListElement: site.business.serviceType.map((s) => ({
+        '@type': 'Offer',
+        itemOffered: { '@type': 'Service', name: s },
+      })),
+    },
+    sameAs: site.business.sameAs,
+  });
+}
+
+// Custom schema passthrough
+if (schema) {
+  const items = Array.isArray(schema) ? schema : [schema];
+  schemaItems.push(...items);
+}
+
+const schemaJson = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': schemaItems,
+});
+---
+
+<!-- Primary Meta -->
+<title>{pageTitle}</title>
+<meta name="description" content={description} />
+{keywords && <meta name="keywords" content={keywords} />}
+<meta name="author" content={author} />
+<meta name="robots" content={robotsContent} />
+<meta name="googlebot" content={robotsContent} />
+
+<!-- Canonical -->
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Geo (local SEO) -->
+<meta name="geo.region" content="US-UT" />
+<meta name="geo.placename" content="Herriman, Utah" />
+
+<!-- Open Graph -->
+<meta property="og:type"        content={ogType} />
+<meta property="og:url"         content={canonicalUrl} />
+<meta property="og:title"       content={pageTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image"       content={ogImage} />
+<meta property="og:image:alt"   content={ogImageAlt} />
+<meta property="og:site_name"   content={site.business.name} />
+<meta property="og:locale"      content="en_US" />
+{publishedTime && <meta property="article:published_time" content={publishedTime} />}
+{modifiedTime  && <meta property="article:modified_time"  content={modifiedTime} />}
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image" />
+<meta name="twitter:site"        content={site.twitterHandle} />
+<meta name="twitter:title"       content={pageTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image"       content={ogImage} />
+
+<!-- Custom Meta passthrough -->
+{customMeta.map((tag) =>
+  tag.property
+    ? <meta property={tag.property} content={tag.content} />
+    : <meta name={tag.name} content={tag.content} />
+)}
+
+<!-- Schema.org JSON-LD -->
+<script type="application/ld+json" set:html={schemaJson}></script>

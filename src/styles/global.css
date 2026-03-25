@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+/* ── Design tokens ─────────────────────────────────────── */
+@layer base {
+  :root {
+    --color-primary:       #16a34a; /* green-600 */
+    --color-primary-light: #dcfce7; /* green-100 */
+    --color-bg:            #ffffff;
+    --color-fg:            #0a0a0a;
+    --color-muted:         #6b7280; /* gray-500 */
+    --color-border:        #e5e7eb; /* gray-200 */
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Playfair Display for headings via .font-display utility */
+  .font-display {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+}
+
+/* ── Fade-in on scroll ──────────────────────────────────── */
+/*
+  Elements with .fade-in start invisible and animate in when
+  they enter the viewport. Activated by the IntersectionObserver
+  script below. Works without JavaScript too (just stays visible).
+*/
+@layer utilities {
+  .fade-in {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Hero left/right variants */
+  .fade-in-left {
+    opacity: 0;
+    transform: translateX(-48px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .fade-in-right {
+    opacity: 0;
+    transform: translateX(48px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out 0.3s;
+  }
+
+  .fade-in-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  /* Line clamp for blog excerpts */
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ── Prose overrides for blog articles ─────────────────── */
+.prose h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Scroll-triggered observer is registered in BaseLayout.astro */

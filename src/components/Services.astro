@@ -1,0 +1,68 @@
+---
+const services = [
+  {
+    title: 'Lawn Mowing',
+    desc: 'Precision mowing with professional-grade equipment for a clean, even cut every time.',
+    gradient: 'from-green-500 to-emerald-600',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0-5.758a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z" />`,
+  },
+  {
+    title: 'Edging',
+    desc: 'Crisp, clean edges along sidewalks, driveways, and garden beds for a polished finish.',
+    gradient: 'from-emerald-500 to-teal-600',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />`,
+  },
+  {
+    title: 'Trimming',
+    desc: 'Expert trimming around trees, fences, and landscaping features your mower can\'t reach.',
+    gradient: 'from-teal-500 to-cyan-600',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />`,
+  },
+  {
+    title: 'Blowing',
+    desc: 'Complete cleanup of clippings and debris from walkways, driveways, and patios.',
+    gradient: 'from-green-600 to-green-700',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />`,
+  },
+  {
+    title: 'Seasonal Cleanup',
+    desc: 'Spring and fall cleanup services including leaf removal, debris clearing, and bed preparation.',
+    gradient: 'from-amber-500 to-orange-600',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" />`,
+  },
+  {
+    title: 'Free Quotes',
+    desc: 'Text or call us anytime for a fast, free estimate. We respond quickly and work around your schedule.',
+    gradient: 'from-blue-500 to-indigo-600',
+    icon: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />`,
+  },
+];
+---
+
+<section id="services" class="py-20 sm:py-28 bg-white">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16 fade-in">
+      <span class="inline-block px-4 py-1.5 bg-green-50 text-green-600 text-sm font-semibold rounded-full mb-4">
+        What We Do
+      </span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 mb-4 font-display">
+        Weekly Lawn Care, <span class="text-green-600">Done Right</span>
+      </h2>
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto">
+        From precision mowing to seasonal cleanups, we keep your yard looking its best all year long.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {services.map(({ title, desc, gradient, icon }, i) => (
+        <div class="fade-in group relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-green-200 transition-all duration-300 hover:shadow-xl hover:shadow-green-500/5 hover:-translate-y-1">
+          <div class={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${gradient} text-white mb-5 group-hover:scale-110 transition-transform duration-300`}>
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" set:html={icon} />
+          </div>
+          <h3 class="text-xl font-bold text-gray-900 mb-3">{title}</h3>
+          <p class="text-gray-500 leading-relaxed">{desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

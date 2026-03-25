@@ -1,0 +1,90 @@
+---
+/**
+ * BaseLayout.astro
+ * Shared shell for every page. Handles:
+ *   - <head> with SEO, analytics, fonts, favicon
+ *   - Phone click → GTM event tracking on all tel: links
+ *   - Slot for page content
+ */
+import '@/styles/global.css';
+import SEO from '@/components/SEO.astro';
+import Analytics from '@/components/Analytics.astro';
+import type { Props as SEOProps } from '@/components/SEO.astro';
+
+export type Props = SEOProps;
+
+const seoProps = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#16a34a" />
+
+    <!-- SEO: title, description, og, twitter, schema.org -->
+    <SEO {...seoProps} />
+
+    <!-- Analytics: GTM, GA4, Clarity, Meta Pixel (via Partytown) -->
+    <Analytics slot="head" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicons/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicons/favicon-96x96.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+  </head>
+
+  <body class="bg-background text-foreground antialiased">
+    <!-- GTM noscript + Meta Pixel noscript (body slot) -->
+    <Analytics slot="body" />
+
+    <slot />
+
+    <!-- Scroll-triggered fade-in animations -->
+    <script>
+      const fadeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              fadeObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.08, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      document
+        .querySelectorAll('.fade-in, .fade-in-left, .fade-in-right')
+        .forEach((el) => fadeObserver.observe(el));
+    </script>
+
+    <!-- Phone click tracking: fires GTM event on every tel: link -->
+    <script>
+      document.addEventListener('click', (e) => {
+        const link = (e.target as Element).closest('a[href^="tel:"]');
+        if (!link) return;
+        const phone = (link as HTMLAnchorElement).href.replace('tel:', '');
+        if (typeof window.dataLayer !== 'undefined') {
+          window.dataLayer.push({
+            event: 'phone_call_click',
+            phone_number: phone,
+            page_path: window.location.pathname,
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

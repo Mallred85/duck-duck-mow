@@ -1,0 +1,96 @@
+---
+/**
+ * FAQ.astro
+ * Accordion FAQ with vanilla JS — no React needed.
+ * Schema.org FAQPage is injected via the page-level SEO component.
+ */
+
+export const faqs = [
+  {
+    question: 'How often do you mow?',
+    answer: 'We offer weekly mowing services during the growing season (typically April through October). We can also arrange bi-weekly service if that better fits your needs.',
+  },
+  {
+    question: 'What areas do you serve?',
+    answer: 'We proudly serve Herriman, Riverton, South Jordan, and Bluffdale, Utah.',
+  },
+  {
+    question: 'How do I get a quote?',
+    answer: 'Simply fill out the form on this page, call us at 801-669-3819, or send us a text anytime. We\'ll get back to you quickly with a free estimate.',
+  },
+  {
+    question: 'What is included in every visit?',
+    answer: 'Every visit includes lawn mowing, edging along all borders, trimming around obstacles and tight spots, and blowing all hard surfaces clean.',
+  },
+  {
+    question: 'Do you offer seasonal cleanup?',
+    answer: 'Yes! We offer spring and fall cleanup services including leaf removal, debris clearing, edge cleanup, and detail trimming. Contact us for a custom quote.',
+  },
+  {
+    question: 'Is there a contract?',
+    answer: 'No contracts. We earn your business every visit. You can pause or stop service anytime — just give us a heads up.',
+  },
+  {
+    question: 'When does the season run?',
+    answer: 'We typically run from April through October in the Salt Lake Valley, depending on weather. We\'ll keep you updated at the start and end of each season.',
+  },
+  {
+    question: 'How do I pay?',
+    answer: 'We accept cash, Venmo, and other common payment methods. We\'ll confirm the best option for you when we set up your service.',
+  },
+];
+---
+
+<section id="faq" class="py-20 sm:py-28 bg-white">
+  <div class="container mx-auto px-4 max-w-3xl">
+    <div class="text-center mb-16 fade-in">
+      <span class="inline-block px-4 py-1.5 bg-green-50 text-green-600 text-sm font-semibold rounded-full mb-4">
+        FAQ
+      </span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 font-display">
+        Common <span class="text-green-600">Questions</span>
+      </h2>
+    </div>
+
+    <div class="space-y-3">
+      {faqs.map(({ question, answer }, i) => (
+        <div
+          class="faq-item fade-in border border-gray-200 rounded-2xl overflow-hidden hover:border-green-200 transition-colors"
+        >
+          <button
+            class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-semibold text-gray-900"
+            aria-expanded="false"
+          >
+            <span>{question}</span>
+            <svg
+              class="faq-icon w-5 h-5 text-green-600 flex-shrink-0 transition-transform duration-200"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5">
+            <p class="text-gray-500 leading-relaxed text-sm">{answer}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const trigger = item.querySelector('.faq-trigger')!;
+    const answer  = item.querySelector('.faq-answer')!;
+    const icon    = item.querySelector('.faq-icon')!;
+
+    trigger.addEventListener('click', () => {
+      const isOpen = !answer.classList.contains('hidden');
+      answer.classList.toggle('hidden', isOpen);
+      icon.classList.toggle('rotate-180', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>
