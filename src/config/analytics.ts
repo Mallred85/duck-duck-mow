@@ -16,7 +16,7 @@ export const analytics = {
    * Get from: tagmanager.google.com > your container
    * Format: GTM-XXXXXXX
    */
-  gtmContainerId: 'GTM-53ZW6V3B',
+  gtmContainerId: '',
 
   /**
    * Google Analytics 4
