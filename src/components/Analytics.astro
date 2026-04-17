@@ -6,7 +6,7 @@
  * src/config/analytics.ts. Empty IDs produce zero output.
  *
  * All third-party scripts use type="text/partytown" so they run
- * in a Web Worker via @astrojs/partytown — keeping the main
+ * in a Web Worker via @astrojs/partytown - keeping the main
  * thread free and protecting Core Web Vitals scores.
  *
  * Usage in BaseLayout.astro:
@@ -39,7 +39,7 @@ const { slot = 'head' } = Astro.props;
       <meta name="google-site-verification" content={googleSiteVerification} />
     )}
 
-    {/* Google Tag Manager — runs in Web Worker via Partytown */}
+    {/* Google Tag Manager - runs in Web Worker via Partytown */}
     {gtmContainerId && (
       <script type="text/partytown" define:vars={{ gtmContainerId }}>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -51,7 +51,7 @@ const { slot = 'head' } = Astro.props;
       </script>
     )}
 
-    {/* GA4 direct — only fires when GTM is NOT configured */}
+    {/* GA4 direct - only fires when GTM is NOT configured */}
     {ga4MeasurementId && !gtmContainerId && (
       <>
         <script

@@ -25,7 +25,7 @@ let reviews: SanityReview[] = [];
 try {
   reviews = await getFeaturedReviews();
 } catch {
-  // Sanity not configured yet — use fallback
+  // Sanity not configured yet - use fallback
 }
 
 if (reviews.length === 0) {

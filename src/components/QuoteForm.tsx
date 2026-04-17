@@ -1,11 +1,11 @@
 /**
- * QuoteForm.tsx — React island
+ * QuoteForm.tsx - React island
  *
  * Used as <QuoteForm client:load /> in Astro pages.
  * POSTs to the Cloudflare Worker which handles email (Resend)
  * and Google Sheet logging.
  *
- * No tRPC, no database dependency — fully decoupled.
+ * No tRPC, no database dependency - fully decoupled.
  */
 
 import React, { useState } from 'react';
@@ -121,7 +121,7 @@ export default function QuoteForm({ endpoint, showPlanSelector = false }: Props)
       className="bg-white rounded-3xl border border-gray-200 shadow-lg p-8 sm:p-10 space-y-6"
       noValidate
     >
-      {/* Honeypot — hidden from real users, catches bots */}
+      {/* Honeypot - hidden from real users, catches bots */}
       <input type="text" name="_hp" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
 
       {/* Plan selector (pricing page only) */}

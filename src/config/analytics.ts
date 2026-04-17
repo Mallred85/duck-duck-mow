@@ -2,7 +2,7 @@
  * ANALYTICS & TRACKING CONFIGURATION
  * ─────────────────────────────────────────────────────────────
  * Drop your IDs here. Leave a field as empty string ("") to
- * disable that integration — no dead script tags are emitted.
+ * disable that integration - no dead script tags are emitted.
  *
  * All scripts run via @astrojs/partytown (Web Worker) so they
  * never block the main thread or hurt Core Web Vitals.
@@ -47,12 +47,12 @@ export const analytics = {
   clarityProjectId: '',
 
   /**
-   * Custom <head> scripts — raw HTML injected verbatim before </head>
+   * Custom <head> scripts - raw HTML injected verbatim before </head>
    */
   customHeadScripts: '',
 
   /**
-   * Custom <body> scripts — raw HTML injected at the start of <body>
+   * Custom <body> scripts - raw HTML injected at the start of <body>
    * GTM noscript is added automatically when gtmContainerId is set.
    */
   customBodyScripts: '',

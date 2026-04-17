@@ -7,7 +7,7 @@
  */
 
 export const site = {
-  /** Canonical base URL — no trailing slash */
+  /** Canonical base URL - no trailing slash */
   url: 'https://duckduckmow.com',
 
   /** Appended to every page <title> */
@@ -63,7 +63,7 @@ export const site = {
 
 export type SiteConfig = typeof site;
 
-/** Phone constants — use these everywhere instead of hardcoding */
+/** Phone constants - use these everywhere instead of hardcoding */
 export const PHONE_DISPLAY = '801-669-3819';
 export const PHONE_HREF = 'tel:+18016693819';
 export const EMAIL = 'info@duckduckmow.com';

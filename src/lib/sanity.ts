@@ -2,7 +2,7 @@
  * SANITY CMS CLIENT
  * ─────────────────────────────────────────────────────────────
  * Project: Duck Duck Mow (lddbseu5)
- * All content is fetched at build time — the site is fully static.
+ * All content is fetched at build time - the site is fully static.
  *
  * SANITY SCHEMA REQUIRED FIELDS (set up in sanity.io Studio):
  * ┌──────────────┬──────────────┬─────────────────────────────┐
@@ -15,7 +15,7 @@
  * │ category     │ string       │ e.g. "Lawn Care Tips"       │
  * │ readTime     │ number       │ Minutes to read             │
  * │ city         │ string       │ Primary service area city   │
- * │ author       │ string       │ Default: Miles — Duck Duck  │
+ * │ author       │ string       │ Default: Miles - Duck Duck  │
  * │ body         │ text         │ HTML content of the article │
  * └──────────────┴──────────────┴─────────────────────────────┘
  *
