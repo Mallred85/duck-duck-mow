@@ -55,9 +55,8 @@ export const site = {
       'Fall Cleanup',
     ],
     sameAs: [
-      // Add social profiles when available:
-      // 'https://www.facebook.com/duckduckmow',
-      // 'https://www.instagram.com/duckduckmow',
+      'https://www.facebook.com/people/Duck-Duck-Mow/61568815225560/',
+      'https://www.instagram.com/duckduckmow3/',
     ],
   },
 } as const;
