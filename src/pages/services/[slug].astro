@@ -11,6 +11,7 @@ export function getStaticPaths() {
     {
       params: { slug: 'lawn-mowing' },
       props: {
+        defaultService: 'Lawn Mowing',
         title: 'Lawn Mowing',
         metaTitle: 'Lawn Mowing Service | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
         metaDesc: 'Professional lawn mowing in Herriman, Riverton, South Jordan, and Bluffdale, Utah. Weekly and bi-monthly schedules. Clean, even cuts every visit. Starting at $35.',
@@ -29,7 +30,7 @@ export function getStaticPaths() {
           { title: 'Edging Included', desc: 'Mowing alone doesn\'t finish a lawn. Every mow includes edging along all hard surfaces.' },
         ],
         faqs: [
-          { q: 'How often should I have my lawn mowed in Utah?', a: 'During peak growing season (May through August), most Utah lawns benefit from weekly mowing. In spring and fall when growth slows, bi-monthly is often sufficient. We\'ll recommend what we think is right for your specific yard.' },
+          { q: 'How often should I have my lawn mowed in Utah?', a: 'During peak growing season (April through September), most Utah lawns benefit from weekly mowing. In spring and fall when growth slows, bi-monthly is often sufficient. We\'ll recommend what we think is right for your specific yard.' },
           { q: 'What height do you cut the grass?', a: 'We mow at 3 to 3.5 inches for most Utah grass types, which is the ideal range for heat resistance and root health. We\'ll never scalp your lawn.' },
           { q: 'Do you mow in straight lines or patterns?', a: 'We vary our mowing direction each visit to prevent ruts and encourage upright grass growth. Your lawn will look professionally maintained, not like a home mow job.' },
           { q: 'Is lawn mowing included with edging and trimming?', a: 'Yes. Mowing, edging, trimming, and blowing are all included on every single visit. There is no à la carte pricing - you always get the full service.' },
@@ -40,6 +41,7 @@ export function getStaticPaths() {
     {
       params: { slug: 'edging' },
       props: {
+        defaultService: 'Edging',
         title: 'Lawn Edging',
         metaTitle: 'Lawn Edging Service | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
         metaDesc: 'Professional lawn edging in Herriman, Riverton, South Jordan, and Bluffdale, UT. Crisp, clean edges along every driveway, sidewalk, and landscape bed. Included on every visit.',
@@ -69,6 +71,7 @@ export function getStaticPaths() {
     {
       params: { slug: 'trimming' },
       props: {
+        defaultService: 'Trimming',
         title: 'Lawn Trimming',
         metaTitle: 'Lawn Trimming Service | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
         metaDesc: 'Detail lawn trimming in Herriman, Riverton, South Jordan, and Bluffdale, UT. Around fences, posts, sprinkler heads, and every obstacle the mower can\'t reach. Every visit.',
@@ -98,6 +101,7 @@ export function getStaticPaths() {
     {
       params: { slug: 'lawn-blowing' },
       props: {
+        defaultService: 'Blowing',
         title: 'Lawn Blowing',
         metaTitle: 'Lawn Blowing & Cleanup | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
         metaDesc: 'Professional lawn blowing service in Herriman, Riverton, South Jordan, and Bluffdale, UT. All clippings blown off driveways, sidewalks, and patios after every mow.',
@@ -127,6 +131,7 @@ export function getStaticPaths() {
     {
       params: { slug: 'seasonal-cleanup' },
       props: {
+        defaultService: 'Seasonal Cleanup',
         title: 'Seasonal Cleanup',
         metaTitle: 'Seasonal Lawn Cleanup | Spring & Fall Cleanup Utah | Duck Duck Mow',
         metaDesc: 'Spring and fall seasonal lawn cleanup in Herriman, Riverton, South Jordan, and Bluffdale, Utah. Leaf removal, debris clearing, and full-yard detail work. Free custom quotes.',
@@ -158,7 +163,7 @@ export function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const { title, metaTitle, metaDesc, keywords, h1, intro, body, features, faqs, serviceSchema } = Astro.props;
+const { title, metaTitle, metaDesc, keywords, h1, intro, body, features, faqs, serviceSchema, defaultService } = Astro.props;
 
 const canonicalUrl = `${site.url}/services/${slug}`;
 
@@ -323,7 +328,7 @@ const faqSchema = {
           <p class="text-gray-500 text-lg">We'll respond same day.</p>
         </div>
         <div class="fade-in">
-          <QuoteForm endpoint={forms.quoteEndpoint} client:load />
+          <QuoteForm endpoint={forms.quoteEndpoint} defaultServices={[defaultService]} client:load />
         </div>
       </div>
     </section>

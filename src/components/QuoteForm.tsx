@@ -37,11 +37,13 @@ const INITIAL_FORM: FormState = {
 interface Props {
   endpoint: string;
   showPlanSelector?: boolean;
+  defaultNeighborhood?: string;
+  defaultServices?: string[];
 }
 
-export default function QuoteForm({ endpoint, showPlanSelector = false }: Props) {
-  const [form, setForm]                 = useState<FormState>(INITIAL_FORM);
-  const [services, setServices]         = useState<string[]>([]);
+export default function QuoteForm({ endpoint, showPlanSelector = false, defaultNeighborhood = '', defaultServices = [] }: Props) {
+  const [form, setForm]                 = useState<FormState>({ ...INITIAL_FORM, neighborhood: defaultNeighborhood });
+  const [services, setServices]         = useState<string[]>(defaultServices);
   const [status, setStatus]             = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [errorMsg, setErrorMsg]         = useState('');
 

@@ -46,7 +46,7 @@ const localSchema = {
 
 const faqs = [
   { q: 'Do you mow all areas of Herriman?', a: 'Yes - we cover the entire city of Herriman, including Mountain View Village, Herriman Towne Center, Butterfield Canyon, and all surrounding neighborhoods.' },
-  { q: 'How often will you mow my Herriman lawn?', a: 'We offer weekly and bi-monthly mowing schedules. For most Herriman yards during the peak growing season (May through September), weekly mowing keeps your lawn looking its best.' },
+  { q: 'How often will you mow my Herriman lawn?', a: 'We offer weekly and bi-monthly mowing schedules. For most Herriman yards during the peak growing season (April through September), weekly mowing keeps your lawn looking its best.' },
   { q: 'What does your Herriman lawn care service include?', a: 'Every visit includes a clean mow, edging along all borders and hard surfaces, trimming around obstacles and fence lines, and blowing all debris off driveways and sidewalks.' },
   { q: 'How do I get a lawn care quote in Herriman?', a: 'Fill out the form on this page, or text us at 801-669-3819. We typically respond same day with a free estimate.' },
 ];
@@ -216,7 +216,7 @@ const faqs = [
           <p class="text-gray-500 text-lg">Fill out the form and we'll get back to you same day.</p>
         </div>
         <div class="fade-in">
-          <QuoteForm endpoint={forms.quoteEndpoint} client:load />
+          <QuoteForm endpoint={forms.quoteEndpoint} defaultNeighborhood="Herriman" client:load />
         </div>
       </div>
     </section>
