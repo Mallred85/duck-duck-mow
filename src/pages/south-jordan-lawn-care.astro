@@ -1,0 +1,246 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import QuoteForm from '@/components/QuoteForm.tsx';
+import { forms } from '@/config/forms';
+import { PHONE_DISPLAY, PHONE_HREF, site } from '@/config/site';
+
+const city = 'South Jordan';
+const zip = '84009';
+const slug = 'south-jordan-lawn-care';
+const canonicalUrl = `${site.url}/${slug}`;
+
+const localSchema = {
+  '@type': ['LawnCareService', 'LocalBusiness'],
+  '@id': `${site.url}/#business-south-jordan`,
+  name: 'Duck Duck Mow',
+  description: `Professional lawn mowing, edging, trimming, and seasonal yard cleanup in South Jordan, UT. Serving Daybreak, The Crossing, and all South Jordan neighborhoods. Free quotes.`,
+  url: canonicalUrl,
+  telephone: site.business.telephone,
+  email: site.business.email,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: city,
+    addressRegion: 'UT',
+    postalCode: zip,
+    addressCountry: 'US',
+  },
+  areaServed: {
+    '@type': 'City',
+    name: city,
+    containedInPlace: { '@type': 'State', name: 'Utah' },
+  },
+  priceRange: '$$',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'South Jordan Lawn Care Services',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lawn Mowing South Jordan UT' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lawn Edging South Jordan UT' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Yard Trimming South Jordan UT' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Seasonal Cleanup South Jordan UT' } },
+    ],
+  },
+};
+
+const faqs = [
+  { q: 'Do you serve Daybreak in South Jordan?', a: 'Yes — Daybreak is one of our most active service areas. Daybreak HOA standards are high, and we consistently deliver the clean, polished results that keep homeowners compliant and looking great.' },
+  { q: 'My South Jordan yard has a lot of landscaping features. Can you handle it?', a: 'Definitely. South Jordan yards often have rock beds, raised planters, decorative edging, and complex layouts. Our trimming and edging work is detail-oriented by design — we work around every feature carefully.' },
+  { q: 'What\'s your schedule availability in South Jordan?', a: 'We have openings throughout the week. Once you\'re on our schedule, you\'ll get the same day and same crew every visit. Consistency is something we take seriously.' },
+  { q: 'How do I get a lawn care quote for South Jordan?', a: 'Fill out the form on this page or text us at 801-669-3819 with your address. We\'ll get you a free estimate quickly — most South Jordan quotes are turned around same day.' },
+];
+---
+
+<BaseLayout
+  title="Lawn Care South Jordan UT | Mowing & Yard Service | Duck Duck Mow"
+  noSuffix
+  description="Professional lawn mowing, edging, trimming, and cleanup in South Jordan, Utah. Serving Daybreak, The Crossing, and all South Jordan neighborhoods. Free quotes, starting at $35/visit."
+  keywords="lawn care South Jordan UT, lawn mowing South Jordan Utah, Daybreak lawn service, South Jordan yard care, lawn service 84009"
+  canonical={canonicalUrl}
+  breadcrumbs={[
+    { name: 'Home', url: site.url },
+    { name: 'South Jordan Lawn Care', url: canonicalUrl },
+  ]}
+  schema={localSchema}
+>
+  <Nav />
+  <main class="pt-16 lg:pt-20">
+
+    <!-- Hero -->
+    <section class="relative pt-16 pb-20 sm:pt-24 sm:pb-28 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-green-50/80 via-white to-emerald-50/40"></div>
+      <div class="container mx-auto px-4 relative z-10 max-w-4xl">
+        <div class="fade-in">
+          <span class="inline-block px-4 py-1.5 bg-green-50 text-green-800 text-sm font-semibold rounded-full mb-4">
+            South Jordan, UT {zip}
+          </span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight font-display">
+            Lawn Care in <span class="text-green-800">South Jordan, Utah</span>
+          </h1>
+          <p class="text-xl text-gray-500 mb-4 max-w-2xl leading-relaxed">
+            South Jordan is one of the best-looking cities in the valley — and Duck Duck Mow helps keep
+            it that way. We provide consistent, detail-focused lawn care for South Jordan homeowners
+            from Daybreak to The Crossing and everywhere in between.
+          </p>
+          <p class="text-gray-500 mb-8 max-w-2xl leading-relaxed">
+            Every visit includes mowing, edging, trimming, and blowing. No contracts, no surprises —
+            just a lawn you'll be proud of starting at $35 per visit.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#quote" class="inline-flex items-center gap-2 px-8 py-4 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-all shadow-lg shadow-green-600/25 text-base">
+              Get a Free Quote
+            </a>
+            <a href={PHONE_HREF} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-green-800 font-bold rounded-full border-2 border-green-200 hover:border-green-400 transition-all text-base">
+              Call {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body Content -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="fade-in mb-12">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 font-display">
+            South Jordan's <span class="text-green-800">Detail-First Lawn Crew</span>
+          </h2>
+          <p class="text-lg text-gray-500 leading-relaxed mb-4">
+            South Jordan homeowners — especially in Daybreak — face some of the highest curb appeal
+            standards in the valley. HOA requirements are strict, neighbors notice, and a poorly
+            maintained lawn stands out for all the wrong reasons.
+          </p>
+          <p class="text-gray-500 leading-relaxed mb-4">
+            We built Duck Duck Mow around the kind of quality that holds up to that scrutiny. Every mow
+            includes full edging along beds and hard surfaces, detailed trimming around every obstacle,
+            and a complete blowout before we leave. Your yard won't just be mowed — it'll look like it
+            was professionally groomed.
+          </p>
+          <p class="text-gray-500 leading-relaxed">
+            And because we're a small, family-run crew, you get real accountability. You have our number,
+            you know our faces, and we're motivated to do great work because our reputation is built
+            one yard at a time.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 fade-in">
+          {[
+            { label: 'Daybreak Specialists', sub: 'We know HOA standards inside and out' },
+            { label: 'Starting at $35', sub: 'Honest pricing, no hidden charges' },
+            { label: 'Same-Day Quotes', sub: 'Text us your address, get a price fast' },
+          ].map(({ label, sub }) => (
+            <div class="text-center p-6 rounded-2xl bg-green-50 border border-green-100">
+              <p class="text-xl font-extrabold text-green-800 mb-1">{label}</p>
+              <p class="text-sm text-gray-500">{sub}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-16 sm:py-20 bg-gradient-to-br from-green-50/40 to-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="text-center mb-12 fade-in">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 font-display">
+            What We Do Every Visit
+          </h2>
+          <p class="text-gray-500 mt-3">Everything your South Jordan lawn needs, every single time.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {[
+            { title: 'Lawn Mowing', desc: 'A precise, even cut every visit. We adjust mowing height based on the season and your grass type to keep your South Jordan lawn healthy and attractive.' },
+            { title: 'Edging', desc: 'Clean, straight edges along every driveway, sidewalk, curb, and landscape bed. Especially important in communities like Daybreak where the details matter.' },
+            { title: 'Trimming', desc: 'We trim every spot the mower can\'t reach — around planters, fence posts, sprinkler heads, retaining walls, and all landscape features.' },
+            { title: 'Blowing', desc: 'No clippings left on your driveway, patio, or sidewalk. We blow everything clean and leave your property looking finished before we go.' },
+          ].map(({ title, desc }) => (
+            <div class="fade-in p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:border-green-200 transition-colors">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 mb-1">{title}</h3>
+                  <p class="text-sm text-gray-500 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 text-center mb-10 font-display fade-in">
+          South Jordan Lawn Care <span class="text-green-800">FAQ</span>
+        </h2>
+        <div class="space-y-3">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item border border-gray-200 rounded-2xl overflow-hidden hover:border-green-200 transition-colors fade-in">
+              <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-semibold text-gray-900" aria-expanded="false">
+                <span>{q}</span>
+                <svg class="faq-icon w-5 h-5 text-green-800 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-answer hidden px-6 pb-5">
+                <p class="text-gray-500 leading-relaxed text-sm">{a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Form -->
+    <section id="quote" class="py-20 sm:py-28 bg-gradient-to-b from-white to-green-50/30">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="text-center mb-12 fade-in">
+          <span class="inline-block px-4 py-1.5 bg-green-50 text-green-800 text-sm font-semibold rounded-full mb-4">
+            Free Quote — South Jordan, UT
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 font-display">
+            Get Your <span class="text-green-800">Free South Jordan Quote</span>
+          </h2>
+          <p class="text-gray-500 text-lg">Fill out the form and we'll respond same day.</p>
+        </div>
+        <div class="fade-in">
+          <QuoteForm endpoint={forms.quoteEndpoint} client:load />
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="py-14 bg-gradient-to-br from-green-600 to-emerald-700 text-white text-center">
+      <div class="container mx-auto px-4 fade-in">
+        <p class="text-white/80 text-lg font-medium mb-4">Let us take lawn care off your plate for good.</p>
+        <a href={PHONE_HREF} class="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-green-800 font-bold rounded-full hover:bg-green-50 transition-all shadow-2xl hover:scale-105 text-xl">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z" />
+          </svg>
+          Call or Text {PHONE_DISPLAY}
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const trigger = item.querySelector('.faq-trigger')!;
+    const answer  = item.querySelector('.faq-answer')!;
+    const icon    = item.querySelector('.faq-icon')!;
+    trigger.addEventListener('click', () => {
+      const isOpen = !answer.classList.contains('hidden');
+      answer.classList.toggle('hidden', isOpen);
+      icon.classList.toggle('rotate-180', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>

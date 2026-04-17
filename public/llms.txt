@@ -1,0 +1,38 @@
+# Duck Duck Mow
+
+> Family-owned lawn care serving Herriman, Riverton, South Jordan, and Bluffdale, Utah. Weekly mowing, edging, trimming, blowing, and seasonal cleanups. Started by brothers in 2020. No contracts, free quotes.
+
+## Core Information
+
+- **Website:** https://duckduckmow.com
+- **Phone:** 801-669-3819
+- **Email:** info@duckduckmow.com
+- **Location:** Herriman, UT 84096
+- **Hours:** Seasonal — April through October
+
+## Services
+
+- [Lawn Mowing](/herriman-lawn-care) - Weekly and bi-monthly mowing, clean even cut every visit
+- [Edging](/services/edging) - Crisp borders along all driveways, sidewalks, and beds
+- [Trimming](/services/trimming) - Around obstacles, fence lines, and tight spots
+- [Blowing](/services/lawn-blowing) - All hard surfaces cleared after every visit
+- [Seasonal Cleanup](/services/seasonal-cleanup) - Spring and fall leaf removal, debris clearing, detail cleanup
+
+## Service Areas
+
+- [Herriman Lawn Care](/herriman-lawn-care) - ZIP 84096, our home base
+- [Riverton Lawn Care](/riverton-lawn-care) - ZIP 84065
+- [South Jordan Lawn Care](/south-jordan-lawn-care) - ZIP 84009
+- [Bluffdale Lawn Care](/bluffdale-lawn-care) - ZIP 84065
+
+## Pricing
+
+- Weekly mowing starting at $35/visit
+- Bi-monthly mowing starting at $45/visit
+- Seasonal cleanup — custom quote based on yard size
+- No contracts, no hidden fees
+
+## Additional
+
+- [Pricing](/pricing) - Plan details and FAQ
+- [FAQ](/#faq) - Common questions about service, season, and payment

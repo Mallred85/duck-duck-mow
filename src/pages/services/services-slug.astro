@@ -1,0 +1,359 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import QuoteForm from '@/components/QuoteForm.tsx';
+import { forms } from '@/config/forms';
+import { PHONE_DISPLAY, PHONE_HREF, site } from '@/config/site';
+
+export function getStaticPaths() {
+  return [
+    {
+      params: { slug: 'lawn-mowing' },
+      props: {
+        title: 'Lawn Mowing',
+        metaTitle: 'Lawn Mowing Service | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
+        metaDesc: 'Professional lawn mowing in Herriman, Riverton, South Jordan, and Bluffdale, Utah. Weekly and bi-monthly schedules. Clean, even cuts every visit. Starting at $35.',
+        keywords: 'lawn mowing Utah, lawn mowing Herriman, lawn mowing Riverton, lawn mowing South Jordan, lawn mowing Bluffdale, weekly lawn mowing Utah',
+        h1: 'Professional Lawn Mowing in South Salt Lake County',
+        intro: 'A great mow is the foundation of every healthy, attractive lawn. Duck Duck Mow delivers a clean, precise cut on every visit — no scalping, no rushing, no missed rows.',
+        body: [
+          'We mow at the correct height for your grass type and adjust as the season changes. In the spring, that means a slightly higher cut to encourage deep root growth. In peak summer, we protect against heat stress. In fall, we prepare your lawn for dormancy.',
+          'Our mowing service covers Herriman, Riverton, South Jordan, and Bluffdale. Whether you need weekly mowing during the growing season or a bi-monthly schedule, we\'ll match the right frequency to your yard\'s needs.',
+          'Every mow is done with clean equipment. We don\'t cross-contaminate lawns — blades are cleaned between properties. That means no weed seeds or disease transferred from a neighbor\'s yard to yours.',
+        ],
+        features: [
+          { title: 'Weekly or Bi-Monthly', desc: 'Choose the schedule that fits your lawn\'s growth rate and your budget.' },
+          { title: 'Height Adjusted by Season', desc: 'We don\'t mow at one height all year. We adjust for your grass type and the current conditions.' },
+          { title: 'Clean Equipment', desc: 'Blades cleaned between properties to protect your lawn\'s health.' },
+          { title: 'Edging Included', desc: 'Mowing alone doesn\'t finish a lawn. Every mow includes edging along all hard surfaces.' },
+        ],
+        faqs: [
+          { q: 'How often should I have my lawn mowed in Utah?', a: 'During peak growing season (May through August), most Utah lawns benefit from weekly mowing. In spring and fall when growth slows, bi-monthly is often sufficient. We\'ll recommend what we think is right for your specific yard.' },
+          { q: 'What height do you cut the grass?', a: 'We mow at 3 to 3.5 inches for most Utah grass types, which is the ideal range for heat resistance and root health. We\'ll never scalp your lawn.' },
+          { q: 'Do you mow in straight lines or patterns?', a: 'We vary our mowing direction each visit to prevent ruts and encourage upright grass growth. Your lawn will look professionally maintained, not like a home mow job.' },
+          { q: 'Is lawn mowing included with edging and trimming?', a: 'Yes. Mowing, edging, trimming, and blowing are all included on every single visit. There is no à la carte pricing — you always get the full service.' },
+        ],
+        serviceSchema: 'Lawn Mowing Service',
+      },
+    },
+    {
+      params: { slug: 'edging' },
+      props: {
+        title: 'Lawn Edging',
+        metaTitle: 'Lawn Edging Service | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
+        metaDesc: 'Professional lawn edging in Herriman, Riverton, South Jordan, and Bluffdale, UT. Crisp, clean edges along every driveway, sidewalk, and landscape bed. Included on every visit.',
+        keywords: 'lawn edging Utah, lawn edging Herriman, edging service Riverton, South Jordan lawn edging, professional edging Utah',
+        h1: 'Lawn Edging Service That Makes the Difference',
+        intro: 'The difference between a mowed lawn and a maintained lawn is in the edges. Duck Duck Mow delivers sharp, defined edges on every visit — it\'s what separates our work from a DIY mow.',
+        body: [
+          'Edging is the detail that makes a yard look professionally cared for. Clean lines along your driveway, sidewalk, and landscape beds signal to everyone who drives by that your property is maintained to a high standard.',
+          'We edge every hard surface border on every visit — driveways, sidewalks, curbs, and landscape bed borders. This isn\'t a premium add-on or something we do "when we have time." It\'s part of every single visit, every time.',
+          'For homeowners in HOA communities like Daybreak in South Jordan, consistent edging is especially important. HOA inspectors notice immediately when edges are overgrown. Our regular edging keeps you in good standing with your HOA without you having to think about it.',
+        ],
+        features: [
+          { title: 'Every Visit, Every Time', desc: 'Edging is included on every mow visit. Never an add-on.' },
+          { title: 'All Border Types', desc: 'Driveways, sidewalks, curbs, landscape beds — every border gets clean lines.' },
+          { title: 'HOA Compliant', desc: 'Consistent enough to pass any HOA inspection.' },
+          { title: 'Paired with Blowing', desc: 'All edging debris is blown clean from hard surfaces before we leave.' },
+        ],
+        faqs: [
+          { q: 'Is edging included in every visit?', a: 'Yes, always. Edging is not an optional service or an add-on. Every mow visit includes edging along all hard surface borders.' },
+          { q: 'What surfaces do you edge along?', a: 'We edge along driveways, sidewalks, curbs, and landscape bed borders. If there\'s a defined border on your property, we edge it.' },
+          { q: 'How deep do you edge?', a: 'We edge deep enough to create a clean, defined separation between grass and hard surfaces — typically 1 to 2 inches. Not so deep that it damages roots, but enough to look sharp.' },
+          { q: 'Do you blow the edging clippings off the driveway?', a: 'Every time. We blow all edging debris off your driveway, sidewalk, and patio before we leave. You\'ll never come home to clippings all over your concrete.' },
+        ],
+        serviceSchema: 'Lawn Edging Service',
+      },
+    },
+    {
+      params: { slug: 'trimming' },
+      props: {
+        title: 'Lawn Trimming',
+        metaTitle: 'Lawn Trimming Service | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
+        metaDesc: 'Detail lawn trimming in Herriman, Riverton, South Jordan, and Bluffdale, UT. Around fences, posts, sprinkler heads, and every obstacle the mower can\'t reach. Every visit.',
+        keywords: 'lawn trimming Utah, weed trimming service Herriman, lawn trimming Riverton, South Jordan trimming service, yard trimming Utah',
+        h1: 'Detail Lawn Trimming — Every Spot the Mower Misses',
+        intro: 'A lawn that\'s only mowed is only half finished. The spots the mower can\'t reach — fence lines, around posts, near obstacles — are exactly where Duck Duck Mow\'s trimming work shows up.',
+        body: [
+          'Trimming is where the detail work gets done. Your mower handles open areas, but it can\'t get close to fence posts, around sprinkler heads, near retaining walls, or under decorative elements. That\'s what trimming is for — and we do it on every visit.',
+          'Neglected trimming is immediately obvious. The overgrown strip along a fence line or the shaggy grass around a mailbox post stands out like a sore thumb against an otherwise clean yard. We eliminate those spots entirely.',
+          'Our trimming coverage includes fence lines, tree bases, around all posts and poles, near water features and rocks, along retaining walls, around mailboxes, and any tight corner or obstacle the mower can\'t navigate. If the grass is there, we trim it.',
+        ],
+        features: [
+          { title: 'Fence Lines', desc: 'Every inch of fence line trimmed cleanly on every visit.' },
+          { title: 'Around All Obstacles', desc: 'Posts, sprinkler heads, trees, mailboxes, and rocks — all trimmed.' },
+          { title: 'Retaining Walls', desc: 'Grass along retaining walls and landscape features trimmed clean.' },
+          { title: 'Included Every Visit', desc: 'Trimming is not an add-on. It\'s part of every single service call.' },
+        ],
+        faqs: [
+          { q: 'Is trimming included in every visit?', a: 'Yes. Trimming is part of every visit, every time. We don\'t charge extra for it or skip it when we\'re in a hurry.' },
+          { q: 'What areas do you trim?', a: 'Fence lines, around trees, near posts and poles, along retaining walls, around sprinkler heads, near rocks and decorative features, and any other obstacle the mower can\'t navigate.' },
+          { q: 'Can you handle complex landscape layouts with lots of obstacles?', a: 'Absolutely. Some of our favorite yards to work on have a lot of character — gardens, raised beds, varied materials. We take the time to trim carefully around each element.' },
+          { q: 'Do you trim at the same height as the mower cut?', a: 'We match the trim height as closely as possible to the mowing height so the whole yard has a consistent, finished appearance.' },
+        ],
+        serviceSchema: 'Lawn Trimming Service',
+      },
+    },
+    {
+      params: { slug: 'lawn-blowing' },
+      props: {
+        title: 'Lawn Blowing',
+        metaTitle: 'Lawn Blowing & Cleanup | Herriman, Riverton, South Jordan & Bluffdale | Duck Duck Mow',
+        metaDesc: 'Professional lawn blowing service in Herriman, Riverton, South Jordan, and Bluffdale, UT. All clippings blown off driveways, sidewalks, and patios after every mow.',
+        keywords: 'lawn blowing Utah, blowing clippings off driveway, lawn cleanup Herriman, yard cleanup service Utah, lawn blowing South Jordan',
+        h1: 'Lawn Blowing — We Leave Your Property Spotless',
+        intro: 'The final step in a complete lawn care visit is blowing all clippings, debris, and edging material off every hard surface. Duck Duck Mow never leaves clippings on your driveway or sidewalk.',
+        body: [
+          'Blowing is the finishing touch that separates a truly clean lawn care visit from a half-finished job. After mowing, edging, and trimming, there are clippings, dirt, and debris on your driveway, sidewalk, and patio. We blow all of it clean before we leave.',
+          'This step is important for more than aesthetics. Grass clippings on concrete decompose quickly and leave stains if left long enough. They track into garages and homes. They end up in storm drains. Blowing them into the lawn before you drive in eliminates all of that.',
+          'We blow every hard surface on your property — driveway, sidewalk, front and back patio, walkways, and any other concrete or pavement. When we\'re done, your property looks like it was just professionally photographed.',
+        ],
+        features: [
+          { title: 'All Hard Surfaces', desc: 'Driveway, sidewalk, patio, walkways — everything blown clean.' },
+          { title: 'Included Every Visit', desc: 'Blowing is not optional or an extra. It\'s part of every service call.' },
+          { title: 'Prevents Staining', desc: 'Clippings on concrete stain over time. We eliminate that problem.' },
+          { title: 'Debris Into the Lawn', desc: 'All clippings are blown back into the turf, not into the street or storm drain.' },
+        ],
+        faqs: [
+          { q: 'Is blowing included in every visit?', a: 'Yes, always. Every mow visit ends with a complete blowout of all hard surfaces. It\'s part of what makes our service feel complete.' },
+          { q: 'What surfaces do you blow?', a: 'Driveways, sidewalks, patios, walkways, and any other paved or hard surface on your property.' },
+          { q: 'Where do the clippings go?', a: 'We blow clippings back onto the lawn where they decompose and return nutrients to the soil. We don\'t blow them into the street or neighboring properties.' },
+          { q: 'Do you blow after trimming and edging too?', a: 'Yes. The blowing happens last, after mowing, edging, and trimming are all complete. It\'s the final step that ties everything together.' },
+        ],
+        serviceSchema: 'Lawn Blowing Service',
+      },
+    },
+    {
+      params: { slug: 'seasonal-cleanup' },
+      props: {
+        title: 'Seasonal Cleanup',
+        metaTitle: 'Seasonal Lawn Cleanup | Spring & Fall Cleanup Utah | Duck Duck Mow',
+        metaDesc: 'Spring and fall seasonal lawn cleanup in Herriman, Riverton, South Jordan, and Bluffdale, Utah. Leaf removal, debris clearing, and full-yard detail work. Free custom quotes.',
+        keywords: 'seasonal lawn cleanup Utah, spring cleanup Herriman, fall cleanup Riverton, leaf removal South Jordan, yard cleanup Bluffdale, fall leaf cleanup Utah',
+        h1: 'Seasonal Lawn Cleanup — Spring & Fall in South Salt Lake County',
+        intro: 'Two times a year, your lawn needs more than a standard mow. Duck Duck Mow\'s seasonal cleanup service gets your yard ready for the season — whether that\'s spring growth or winter dormancy.',
+        body: [
+          'Spring cleanup is about clearing out everything that accumulated over winter and giving your lawn a fresh start. That means removing dead leaves, debris, and any winter damage — then often a deep edge and trim to reset all the borders that have crept over the off-season.',
+          'Fall cleanup prepares your lawn for winter dormancy. Leaves left on grass through winter create mold, disease, and damage that shows up in spring. We remove all leaf accumulation, clear debris from beds and hard surfaces, and leave your yard in the best possible condition for winter.',
+          'Our seasonal cleanup service is available to both regular mowing customers and one-time clients. If your yard has been neglected or you just moved in and need a fresh start, we\'re happy to come out for a standalone cleanup. Pricing is customized based on your yard size and condition.',
+        ],
+        features: [
+          { title: 'Leaf Removal', desc: 'Full removal of all leaf accumulation from lawn, beds, and hard surfaces.' },
+          { title: 'Debris Clearing', desc: 'Sticks, dead plants, winter debris — all cleared before we leave.' },
+          { title: 'Edge & Trim Reset', desc: 'We reset all edges and trim lines that have crept over the off-season.' },
+          { title: 'Spring & Fall Available', desc: 'We offer cleanup service at both ends of the season, or on demand.' },
+        ],
+        faqs: [
+          { q: 'When should I schedule a spring cleanup?', a: 'In Utah\'s Salt Lake Valley, mid-April through early May is ideal for spring cleanup — after the last hard freeze but before the first big growth push. The sooner you get it done, the better head start your lawn gets.' },
+          { q: 'When should I schedule a fall cleanup?', a: 'Late October through November is the right window for fall cleanup in Herriman, Riverton, South Jordan, and Bluffdale. You want to wait until most leaves have fallen but finish before the first hard freeze.' },
+          { q: 'How much does a seasonal cleanup cost?', a: 'We custom quote every cleanup based on yard size, amount of debris, and what needs to be done. Text us your address at 801-669-3819 and we\'ll get you a price quickly.' },
+          { q: 'Do I need to be a regular mowing customer to get a cleanup?', a: 'No. Seasonal cleanups are available to anyone in our service area. Many of our cleanup clients eventually become regular mowing customers, but it\'s not required.' },
+          { q: 'What happens to the leaves and debris?', a: 'We bag or haul all leaf and debris material. We don\'t just blow it into the street or a neighbor\'s yard. Everything is properly removed.' },
+        ],
+        serviceSchema: 'Seasonal Lawn Cleanup Service',
+      },
+    },
+  ];
+}
+
+const { slug } = Astro.params;
+const { title, metaTitle, metaDesc, keywords, h1, intro, body, features, faqs, serviceSchema } = Astro.props;
+
+const canonicalUrl = `${site.url}/services/${slug}`;
+
+const serviceSchemaObj = {
+  '@type': 'Service',
+  name: serviceSchema,
+  provider: {
+    '@type': ['LawnCareService', 'LocalBusiness'],
+    name: 'Duck Duck Mow',
+    telephone: site.business.telephone,
+    url: site.url,
+    areaServed: ['Herriman UT', 'Riverton UT', 'South Jordan UT', 'Bluffdale UT'],
+  },
+  areaServed: ['Herriman UT', 'Riverton UT', 'South Jordan UT', 'Bluffdale UT'],
+  description: metaDesc,
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<BaseLayout
+  title={metaTitle}
+  noSuffix
+  description={metaDesc}
+  keywords={keywords}
+  canonical={canonicalUrl}
+  breadcrumbs={[
+    { name: 'Home', url: site.url },
+    { name: 'Services', url: `${site.url}/services` },
+    { name: title, url: canonicalUrl },
+  ]}
+  schema={[serviceSchemaObj, faqSchema]}
+>
+  <Nav />
+  <main class="pt-16 lg:pt-20">
+
+    <!-- Hero -->
+    <section class="relative pt-16 pb-20 sm:pt-24 sm:pb-28 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-green-50/80 via-white to-emerald-50/40"></div>
+      <div class="container mx-auto px-4 relative z-10 max-w-4xl">
+        <div class="fade-in">
+          <div class="flex items-center gap-2 mb-4">
+            <a href="/services" class="text-sm text-green-700 hover:text-green-800 font-medium">Services</a>
+            <span class="text-gray-300">/</span>
+            <span class="text-sm text-gray-500">{title}</span>
+          </div>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight font-display">
+            {h1}
+          </h1>
+          <p class="text-xl text-gray-500 mb-8 max-w-2xl leading-relaxed">
+            {intro}
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/#contact" class="inline-flex items-center gap-2 px-8 py-4 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-all shadow-lg shadow-green-600/25 text-base">
+              Get a Free Quote
+            </a>
+            <a href={PHONE_HREF} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-green-800 font-bold rounded-full border-2 border-green-200 hover:border-green-400 transition-all text-base">
+              Call {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body Copy -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="prose prose-gray max-w-none fade-in">
+          {body.map((para) => (
+            <p class="text-gray-500 leading-relaxed mb-4 text-lg">{para}</p>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="py-16 sm:py-20 bg-gradient-to-br from-green-50/40 to-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 mb-10 font-display fade-in">
+          What You Get
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {features.map(({ title: ftitle, desc }) => (
+            <div class="fade-in p-6 rounded-2xl bg-white border border-gray-100 shadow-sm">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 mb-1">{ftitle}</h3>
+                  <p class="text-sm text-gray-500 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Service Areas -->
+    <section class="py-12 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-4 max-w-4xl fade-in">
+        <p class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Service Areas</p>
+        <div class="flex flex-wrap gap-3">
+          {[
+            { label: 'Herriman', href: '/herriman-lawn-care' },
+            { label: 'Riverton', href: '/riverton-lawn-care' },
+            { label: 'South Jordan', href: '/south-jordan-lawn-care' },
+            { label: 'Bluffdale', href: '/bluffdale-lawn-care' },
+          ].map(({ label, href }) => (
+            <a href={href} class="px-4 py-2 rounded-full border border-green-200 text-green-800 text-sm font-medium hover:bg-green-50 transition-colors">
+              {label}, UT
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 text-center mb-10 font-display fade-in">
+          {title} <span class="text-green-800">FAQ</span>
+        </h2>
+        <div class="space-y-3">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item border border-gray-200 rounded-2xl overflow-hidden hover:border-green-200 transition-colors fade-in">
+              <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-semibold text-gray-900" aria-expanded="false">
+                <span>{q}</span>
+                <svg class="faq-icon w-5 h-5 text-green-800 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-answer hidden px-6 pb-5">
+                <p class="text-gray-500 leading-relaxed text-sm">{a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote Form -->
+    <section class="py-20 sm:py-28 bg-gradient-to-b from-white to-green-50/30">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="text-center mb-12 fade-in">
+          <span class="inline-block px-4 py-1.5 bg-green-50 text-green-800 text-sm font-semibold rounded-full mb-4">
+            Free Quote
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 font-display">
+            Get a Free <span class="text-green-800">{title} Quote</span>
+          </h2>
+          <p class="text-gray-500 text-lg">We'll respond same day.</p>
+        </div>
+        <div class="fade-in">
+          <QuoteForm endpoint={forms.quoteEndpoint} client:load />
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="py-14 bg-gradient-to-br from-green-600 to-emerald-700 text-white text-center">
+      <div class="container mx-auto px-4 fade-in">
+        <p class="text-white/80 text-lg font-medium mb-4">Questions? Just text or call us.</p>
+        <a href={PHONE_HREF} class="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-green-800 font-bold rounded-full hover:bg-green-50 transition-all shadow-2xl hover:scale-105 text-xl">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z" />
+          </svg>
+          Call or Text {PHONE_DISPLAY}
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const trigger = item.querySelector('.faq-trigger')!;
+    const answer  = item.querySelector('.faq-answer')!;
+    const icon    = item.querySelector('.faq-icon')!;
+    trigger.addEventListener('click', () => {
+      const isOpen = !answer.classList.contains('hidden');
+      answer.classList.toggle('hidden', isOpen);
+      icon.classList.toggle('rotate-180', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>

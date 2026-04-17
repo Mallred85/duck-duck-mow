@@ -91,7 +91,7 @@ if (breadcrumbs.length > 0) {
 // LocalBusiness — homepage only
 if (Astro.url.pathname === '/') {
   schemaItems.push({
-    '@type': 'LocalBusiness',
+    '@type': ['LawnCareService', 'LocalBusiness'],
     '@id': `${site.url}/#business`,
     name: site.business.name,
     description: site.business.description,
