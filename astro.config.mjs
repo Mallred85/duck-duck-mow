@@ -21,6 +21,43 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      serialize(item) {
+        // Homepage - highest priority
+        if (item.url === 'https://duckduckmow.com/') {
+          return { ...item, priority: 1.0, changefreq: 'weekly' };
+        }
+        // Location pages - very high, core local SEO pages
+        if (
+          item.url.includes('/herriman-lawn-care') ||
+          item.url.includes('/riverton-lawn-care') ||
+          item.url.includes('/south-jordan-lawn-care') ||
+          item.url.includes('/bluffdale-lawn-care')
+        ) {
+          return { ...item, priority: 0.9, changefreq: 'monthly' };
+        }
+        // Pricing page - high conversion page
+        if (item.url.includes('/pricing')) {
+          return { ...item, priority: 0.85, changefreq: 'monthly' };
+        }
+        // Service pages - high value
+        if (item.url.includes('/services/')) {
+          return { ...item, priority: 0.8, changefreq: 'monthly' };
+        }
+        // Services index
+        if (item.url === 'https://duckduckmow.com/services/') {
+          return { ...item, priority: 0.8, changefreq: 'monthly' };
+        }
+        // Blog posts - lower, changes frequently
+        if (item.url.includes('/blog/')) {
+          return { ...item, priority: 0.6, changefreq: 'monthly' };
+        }
+        // Blog index
+        if (item.url === 'https://duckduckmow.com/blog/') {
+          return { ...item, priority: 0.5, changefreq: 'weekly' };
+        }
+        // Everything else
+        return { ...item, priority: 0.5 };
+      },
     }),
   ],
   vite: {
