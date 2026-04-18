@@ -8,14 +8,14 @@
 - **Phone:** 801-669-3819
 - **Email:** info@duckduckmow.com
 - **Location:** Herriman, UT 84096
-- **Hours:** Seasonal — April through October
+- **Hours:** Seasonal - April through September
 
 ## Services
 
-- [Lawn Mowing](/herriman-lawn-care) - Weekly and bi-monthly mowing, clean even cut every visit
+- [Lawn Mowing](/services/lawn-mowing) - Weekly and bi-monthly mowing, clean even cut every visit
 - [Edging](/services/edging) - Crisp borders along all driveways, sidewalks, and beds
 - [Trimming](/services/trimming) - Around obstacles, fence lines, and tight spots
-- [Blowing](/services/lawn-blowing) - All hard surfaces cleared after every visit
+- [Lawn Blowing](/services/lawn-blowing) - All hard surfaces cleared after every visit
 - [Seasonal Cleanup](/services/seasonal-cleanup) - Spring and fall leaf removal, debris clearing, detail cleanup
 
 ## Service Areas
@@ -25,12 +25,48 @@
 - [South Jordan Lawn Care](/south-jordan-lawn-care) - ZIP 84009
 - [Bluffdale Lawn Care](/bluffdale-lawn-care) - ZIP 84065
 
+## City + Service Pages
+
+### Herriman
+- [Lawn Mowing in Herriman](/herriman-lawn-care/lawn-mowing)
+- [Edging in Herriman](/herriman-lawn-care/edging)
+- [Trimming in Herriman](/herriman-lawn-care/trimming)
+- [Lawn Blowing in Herriman](/herriman-lawn-care/lawn-blowing)
+- [Seasonal Cleanup in Herriman](/herriman-lawn-care/seasonal-cleanup)
+
+### Riverton
+- [Lawn Mowing in Riverton](/riverton-lawn-care/lawn-mowing)
+- [Edging in Riverton](/riverton-lawn-care/edging)
+- [Trimming in Riverton](/riverton-lawn-care/trimming)
+- [Lawn Blowing in Riverton](/riverton-lawn-care/lawn-blowing)
+- [Seasonal Cleanup in Riverton](/riverton-lawn-care/seasonal-cleanup)
+
+### South Jordan
+- [Lawn Mowing in South Jordan](/south-jordan-lawn-care/lawn-mowing)
+- [Edging in South Jordan](/south-jordan-lawn-care/edging)
+- [Trimming in South Jordan](/south-jordan-lawn-care/trimming)
+- [Lawn Blowing in South Jordan](/south-jordan-lawn-care/lawn-blowing)
+- [Seasonal Cleanup in South Jordan](/south-jordan-lawn-care/seasonal-cleanup)
+
+### Bluffdale
+- [Lawn Mowing in Bluffdale](/bluffdale-lawn-care/lawn-mowing)
+- [Edging in Bluffdale](/bluffdale-lawn-care/edging)
+- [Trimming in Bluffdale](/bluffdale-lawn-care/trimming)
+- [Lawn Blowing in Bluffdale](/bluffdale-lawn-care/lawn-blowing)
+- [Seasonal Cleanup in Bluffdale](/bluffdale-lawn-care/seasonal-cleanup)
+
 ## Pricing
 
 - Weekly mowing starting at $35/visit
 - Bi-monthly mowing starting at $45/visit
-- Seasonal cleanup — custom quote based on yard size
+- Seasonal cleanup - custom quote based on yard size
 - No contracts, no hidden fees
+
+## Additional
+
+- [Pricing](/pricing) - Plan details and FAQ
+- [FAQ](/#faq) - Common questions about service, season, and payment
+- [Blog](/blog) - Lawn care tips and guides
 
 ## Social
 

@@ -4,21 +4,25 @@ const areas = [
     city: 'Herriman',
     desc: 'Our home base. We know every neighborhood and serve the full city.',
     zip: '84096',
+    href: '/herriman-lawn-care',
   },
   {
     city: 'Riverton',
     desc: 'Full coverage throughout Riverton, including Mountain View Corridor neighborhoods.',
     zip: '84065',
+    href: '/riverton-lawn-care',
   },
   {
     city: 'South Jordan',
     desc: 'Serving South Jordan homeowners from Daybreak to The Crossing and everywhere in between.',
     zip: '84009',
+    href: '/south-jordan-lawn-care',
   },
   {
     city: 'Bluffdale',
     desc: 'Including the Bluffdale city center and surrounding residential areas.',
     zip: '84065',
+    href: '/bluffdale-lawn-care',
   },
 ];
 ---
@@ -42,8 +46,8 @@ const areas = [
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {areas.map(({ city, desc, zip }) => (
-        <div class="fade-in group text-center p-8 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/15 transition-all">
+      {areas.map(({ city, desc, zip, href }) => (
+        <a href={href} class="fade-in group text-center p-8 rounded-2xl bg-white/10 border border-white/10 hover:bg-white/20 transition-all">
           <div class="w-16 h-16 mx-auto mb-4 rounded-2xl bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition-colors">
             <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -54,8 +58,14 @@ const areas = [
           </div>
           <h3 class="text-xl font-extrabold text-white mb-1">{city}</h3>
           <p class="text-xs text-green-400 font-semibold mb-3">Utah</p>
-          <p class="text-white/60 text-sm leading-relaxed">{desc}</p>
-        </div>
+          <p class="text-white/60 text-sm leading-relaxed mb-3">{desc}</p>
+          <span class="inline-flex items-center gap-1 text-green-400 text-xs font-semibold group-hover:text-green-300 transition-colors">
+            Learn more
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </span>
+        </a>
       ))}
     </div>
 

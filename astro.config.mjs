@@ -26,6 +26,19 @@ export default defineConfig({
         if (item.url === 'https://duckduckmow.com/') {
           return { ...item, priority: 1.0, changefreq: 'weekly' };
         }
+        // City/service combination pages - high local SEO value
+        if (
+          (item.url.includes('/herriman-lawn-care/') ||
+           item.url.includes('/riverton-lawn-care/') ||
+           item.url.includes('/south-jordan-lawn-care/') ||
+           item.url.includes('/bluffdale-lawn-care/')) &&
+          !item.url.endsWith('/herriman-lawn-care/') &&
+          !item.url.endsWith('/riverton-lawn-care/') &&
+          !item.url.endsWith('/south-jordan-lawn-care/') &&
+          !item.url.endsWith('/bluffdale-lawn-care/')
+        ) {
+          return { ...item, priority: 0.85, changefreq: 'monthly' };
+        }
         // Location pages - very high, core local SEO pages
         if (
           item.url.includes('/herriman-lawn-care') ||

@@ -1,0 +1,468 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import QuoteForm from '@/components/QuoteForm.tsx';
+import { forms } from '@/config/forms';
+import { PHONE_DISPLAY, PHONE_HREF, site } from '@/config/site';
+
+export function getStaticPaths() {
+  const cities = [
+    {
+      slug: 'herriman-lawn-care',
+      name: 'Herriman',
+      zip: '84096',
+      id: 'herriman',
+      neighborhoods: 'Mountain View Village, Herriman Towne Center, Butterfield Canyon, and Rosecrest',
+      cityDesc: 'one of Utah\'s fastest-growing cities with high HOA standards and well-kept neighborhoods',
+      lotNote: 'Herriman lots tend to be newer construction with clean layouts and active HOAs that notice the details',
+      seasonal: 'Herriman sits at a slightly higher elevation than the rest of the valley, which means the growing season can start a week or two later in spring and wrap up a bit earlier in fall',
+    },
+    {
+      slug: 'riverton-lawn-care',
+      name: 'Riverton',
+      zip: '84065',
+      id: 'riverton',
+      neighborhoods: 'areas along the Mountain View Corridor, near Redwood Road, and neighborhoods bordering South Jordan',
+      cityDesc: 'a well-established city with a mix of mature landscaping and newer developments',
+      lotNote: 'Riverton yards vary widely - some are compact and manicured, others have mature trees and more complex layouts that require careful trimming work',
+      seasonal: 'Riverton\'s position in the valley means a full growing season from April through September, with grass that can grow fast during the wet spring months',
+    },
+    {
+      slug: 'south-jordan-lawn-care',
+      name: 'South Jordan',
+      zip: '84009',
+      id: 'south-jordan',
+      neighborhoods: 'Daybreak, The Crossing, and surrounding South Jordan communities',
+      cityDesc: 'a high-standard community where Daybreak HOA requirements set a high bar for lawn appearance',
+      lotNote: 'South Jordan yards - especially in Daybreak - are designed to look sharp, with defined borders, landscape features, and HOA inspections that keep homeowners accountable',
+      seasonal: 'South Jordan sits in the heart of the Salt Lake Valley with a reliable April through September growing season and hot summers that stress grass if it\'s not mowed at the right height',
+    },
+    {
+      slug: 'bluffdale-lawn-care',
+      name: 'Bluffdale',
+      zip: '84065',
+      id: 'bluffdale',
+      neighborhoods: 'Bluffdale city center and surrounding residential areas along the Point of the Mountain',
+      cityDesc: 'a community known for larger lots and more open space than typical Salt Lake suburbs',
+      lotNote: 'Bluffdale properties are often larger than standard suburban lots, which means more ground to cover, more fence line to trim, and more hard surface to blow clean - we account for all of that in our quotes',
+      seasonal: 'Bluffdale\'s location near the Point of the Mountain means it can be windier and slightly cooler than central Salt Lake, which affects how quickly grass grows and dries between visits',
+    },
+  ];
+
+  const services = [
+    {
+      slug: 'lawn-mowing',
+      name: 'Lawn Mowing',
+      serviceName: 'Lawn Mowing',
+      precheck: 'Lawn Mowing',
+      image: '/images/service-mowing.webp',
+      shortDesc: 'clean, even cuts at the right height every visit',
+      intro: (city: string, cityDesc: string) =>
+        `Lawn mowing in ${city} isn't one-size-fits-all. Duck Duck Mow delivers a precise, professional cut tailored to your yard's size, grass type, and the current season - every single visit.`,
+      body: (city: string, lotNote: string, seasonal: string) => [
+        `${lotNote}. That's why we take the time to assess each property before we set a mowing height and pattern. We don't show up and rush through it - we mow at the right speed to get clean, even results.`,
+        `${seasonal}. We adjust our mowing schedule and cut height accordingly, so your lawn stays healthy through every phase of the season rather than getting scalped in summer or cut too short in spring.`,
+        `Every mow includes edging, trimming, and blowing - nothing extra to pay for, nothing left out. When we're done, your ${city} yard looks professionally maintained from the curb to the back fence.`,
+      ],
+      features: (city: string) => [
+        { title: 'Right Height Every Time', desc: `We mow at 3 to 3.5 inches for most ${city} lawns - the sweet spot for heat resistance and root health.` },
+        { title: 'Varied Mowing Pattern', desc: 'We change direction each visit to prevent ruts and encourage upright grass growth.' },
+        { title: 'Clean Equipment', desc: 'Blades cleaned between properties - no cross-contamination of weeds or disease.' },
+        { title: 'Full Service Included', desc: 'Edging, trimming, and blowing come with every mow. No add-ons, no surprises.' },
+      ],
+      faqs: (city: string) => [
+        { q: `How often should I have my lawn mowed in ${city}?`, a: `During the peak growing season (April through September), most ${city} lawns need weekly mowing. In early spring and fall when growth slows, bi-monthly works well. We'll tell you honestly what we think your specific yard needs.` },
+        { q: 'Do you mow in straight lines or patterns?', a: `We vary the mowing direction each visit to prevent compaction and ruts. Your ${city} lawn will look sharp and professionally maintained, not like a home mow job.` },
+        { q: `What's included with every mow in ${city}?`, a: 'Every visit includes mowing, edging along all borders, trimming around obstacles, and blowing all hard surfaces clean. It\'s a complete service every time.' },
+        { q: 'How do I get a mowing quote?', a: `Fill out the form on this page or text us at 801-669-3819 with your ${city} address. We respond same day with a free estimate.` },
+      ],
+    },
+    {
+      slug: 'edging',
+      name: 'Edging',
+      serviceName: 'Lawn Edging',
+      precheck: 'Edging',
+      image: '/images/service-edging-2.webp',
+      shortDesc: 'crisp defined lines along every border, every visit',
+      intro: (city: string, cityDesc: string) =>
+        `In ${city}, a well-edged lawn stands out. Duck Duck Mow delivers sharp, defined edges along every driveway, sidewalk, and landscape bed on every single visit - no exceptions, no skipped borders.`,
+      body: (city: string, lotNote: string, seasonal: string) => [
+        `Clean edging is the detail that separates a mowed lawn from a maintained one. Overgrown edges along a driveway or sidewalk undercut everything else - even a freshly mowed yard looks neglected when the borders are fuzzy. We don't let that happen.`,
+        `${lotNote}. We edge every defined border on your property: driveways, sidewalks, curbs, and landscape bed lines. On visits after heavy rain or fast spring growth, we may go deeper to reset creeping grass that has spread onto hard surfaces.`,
+        `For ${city} homeowners with HOA requirements, consistent edging is especially important. Inspectors notice immediately when borders are overgrown. Our regular service keeps you in compliance without you having to think about it.`,
+      ],
+      features: (city: string) => [
+        { title: 'Every Border, Every Visit', desc: 'Driveways, sidewalks, curbs, and landscape bed borders - all edged on every service call.' },
+        { title: `HOA-Ready Results`, desc: `Consistent enough to pass any ${city} HOA inspection, every time.` },
+        { title: 'Debris Blown Clean', desc: 'All edging clippings are blown off hard surfaces before we leave. No mess left behind.' },
+        { title: 'Included in Every Visit', desc: 'Edging is never an add-on or an upgrade. It comes with every mow.' },
+      ],
+      faqs: (city: string) => [
+        { q: 'Is edging included in every visit?', a: 'Yes, always. Edging is part of every service call - not an optional add-on.' },
+        { q: `Do you edge landscape beds in ${city} yards?`, a: 'Yes. We edge along all defined landscape bed borders, not just hard surfaces. If there\'s a clear line between grass and another material, we edge it.' },
+        { q: 'How do you handle edging after a wet week when grass has grown into the driveway?', a: 'We go as deep as needed to restore a clean, defined edge. Heavy growth periods sometimes require more aggressive edging, and we handle that without charging extra.' },
+        { q: 'Will edging damage my driveway or sidewalk?', a: 'No. We edge to create a clean separation between the grass and hard surfaces without cutting into concrete or pavers.' },
+      ],
+    },
+    {
+      slug: 'trimming',
+      name: 'Trimming',
+      serviceName: 'Lawn Trimming',
+      precheck: 'Trimming',
+      image: '/images/service-trimming.webp',
+      shortDesc: 'every spot the mower misses, cleaned up every visit',
+      intro: (city: string, cityDesc: string) =>
+        `The mower handles open turf. Everything else - fence lines, around posts, near retaining walls, tight corners - that's where Duck Duck Mow's detail trimming work shows up in every ${city} yard we service.`,
+      body: (city: string, lotNote: string, seasonal: string) => [
+        `Neglected trimming is one of the most visible signs of a poorly maintained lawn. The shaggy strip along a fence line, the overgrown grass around a mailbox post, the scraggly growth near a retaining wall - these details stand out and drag down the look of an otherwise clean yard.`,
+        `${lotNote}. We trim every area the mower can't navigate: fence lines along the entire perimeter, around every post and pole, near sprinkler heads and valve boxes, along retaining walls and rock borders, around trees, mailboxes, and any other obstacle on your property.`,
+        `The goal is for your ${city} yard to look like one continuous, finished surface - not a mowed center with raggedy edges. That's what thorough trimming accomplishes, and it's included on every single visit.`,
+      ],
+      features: (city: string) => [
+        { title: 'Full Fence Line Coverage', desc: `Every inch of fence line on your ${city} property trimmed cleanly on every visit.` },
+        { title: 'Around Every Obstacle', desc: 'Posts, sprinkler heads, trees, rocks, mailboxes - nothing gets skipped.' },
+        { title: 'Matched to Mowing Height', desc: 'We trim as close to the mowing height as possible for a consistent, finished look.' },
+        { title: 'Included Every Visit', desc: 'Trimming is not an add-on. It comes with every mow, no exceptions.' },
+      ],
+      faqs: (city: string) => [
+        { q: `My ${city} yard has a lot of landscape features. Can you handle it?`, a: 'Absolutely. Complex yards with raised beds, rock borders, decorative features, and multiple obstacles are where our detail-oriented approach really shows. We take the time to trim carefully around every element.' },
+        { q: 'Do you trim around sprinkler heads?', a: 'Yes. Sprinkler heads and valve boxes are some of the most commonly missed spots. We trim around all of them carefully to avoid damage.' },
+        { q: 'Is trimming included in every visit?', a: 'Yes, always. Trimming is part of every service call. We never skip it or charge extra for it.' },
+        { q: 'What if I have a new fence or obstacle installed between visits?', a: `Just let us know when we arrive or text us ahead of time. We'll incorporate any new features into our ${city} trimming routine without any extra hassle.` },
+      ],
+    },
+    {
+      slug: 'lawn-blowing',
+      name: 'Lawn Blowing',
+      serviceName: 'Lawn Blowing',
+      precheck: 'Blowing',
+      image: '/images/service-blowing.webp',
+      shortDesc: 'every hard surface blown spotless before we leave',
+      intro: (city: string, cityDesc: string) =>
+        `Duck Duck Mow doesn't leave a job half done. After every mow, edge, and trim on your ${city} property, we blow every hard surface completely clean before we pack up. No clippings on your driveway, ever.`,
+      body: (city: string, lotNote: string, seasonal: string) => [
+        `Blowing is the finishing step that makes the difference between a yard that was serviced and a yard that looks professionally maintained. Grass clippings left on concrete are more than an eyesore - they decompose quickly, leaving stains, tracking into garages, and ending up in storm drains.`,
+        `We blow every hard surface on your ${city} property: driveway, front and back sidewalks, patio, walkways, and any other paved area. All clippings go back onto the lawn where they break down and return nutrients to the soil - not into the street or a neighbor's yard.`,
+        `${lotNote}. Larger properties have more hard surface to cover, and we make sure every inch is cleared. When we leave, your property looks like it was just photographed for a real estate listing.`,
+      ],
+      features: (city: string) => [
+        { title: 'Every Hard Surface', desc: `Driveway, sidewalks, patio, walkways - every paved surface on your ${city} property blown clean.` },
+        { title: 'Clippings Back to the Lawn', desc: 'We blow clippings into the turf, not the street or storm drains.' },
+        { title: 'Prevents Concrete Staining', desc: 'Grass clippings stain concrete if left. We eliminate that problem every visit.' },
+        { title: 'Always the Last Step', desc: 'Blowing happens after everything else is done - it\'s the final touch that ties it all together.' },
+      ],
+      faqs: (city: string) => [
+        { q: 'Is blowing included in every visit?', a: 'Yes. We blow all hard surfaces clean at the end of every service call. It\'s not optional and it\'s not extra.' },
+        { q: `What surfaces do you blow on a typical ${city} property?`, a: 'Driveways, front and back sidewalks, patios, walkways, and any other paved or hard surface. If you have a surface you want us to make sure we cover, just let us know.' },
+        { q: 'Where do the grass clippings go?', a: 'We blow clippings back onto the lawn where they decompose and return nutrients to the soil. We never blow them into the street, gutter, or onto a neighbor\'s property.' },
+        { q: 'Do you blow after trimming and edging too?', a: 'Yes. The blowing always happens last, after mowing, edging, and trimming are all complete. It\'s the step that makes everything look finished.' },
+      ],
+    },
+    {
+      slug: 'seasonal-cleanup',
+      name: 'Seasonal Cleanup',
+      serviceName: 'Seasonal Cleanup',
+      precheck: 'Seasonal Cleanup',
+      image: '/images/service-cleanup.webp',
+      shortDesc: 'spring and fall cleanup tailored to your yard',
+      intro: (city: string, cityDesc: string) =>
+        `Twice a year your ${city} lawn needs more than a standard mow. Duck Duck Mow's seasonal cleanup service clears the slate in spring and puts your yard to bed right in fall - so it looks its best all season long.`,
+      body: (city: string, lotNote: string, seasonal: string) => [
+        `Spring cleanup in ${city} is about removing everything that built up over winter and giving your lawn a clean start. That means clearing dead leaves and debris, removing any winter damage, resetting edges that crept during the dormant season, and leaving the yard ready to grow. Most ${city} homeowners schedule spring cleanup in April once the ground has thawed and the last hard freeze has passed.`,
+        `Fall cleanup prepares your lawn for winter dormancy. Leaves left on ${city} grass through the winter create mold, fungal issues, and dead patches that show up in spring. We remove all leaf accumulation, clear debris from beds and hard surfaces, and leave your yard in the best possible condition before the cold sets in. Late October through mid-November is the right window for most ${city} properties.`,
+        `${lotNote}. We price cleanup jobs based on your actual yard size and condition - not a flat rate that penalizes smaller yards or underbids larger ones. Text us your address and we'll give you a fast, honest estimate.`,
+      ],
+      features: (city: string) => [
+        { title: 'Full Leaf Removal', desc: `All leaves cleared from lawn, beds, and hard surfaces on your ${city} property.` },
+        { title: 'Debris Clearing', desc: 'Sticks, dead plant material, and winter debris removed before we leave.' },
+        { title: 'Edge and Trim Reset', desc: 'We reset all borders and trim lines that crept during the off-season.' },
+        { title: 'Spring and Fall Available', desc: 'We offer cleanup at both ends of the season, or on demand for one-time clients.' },
+      ],
+      faqs: (city: string) => [
+        { q: `When should I schedule a spring cleanup in ${city}?`, a: `Mid-April is the ideal window for most ${city} properties - after the last hard freeze but before the first big growth push. The earlier you get it done, the better head start your lawn gets going into the season.` },
+        { q: `When should I schedule a fall cleanup in ${city}?`, a: `Late October through mid-November is the right window for ${city}. You want to wait until most leaves have fallen but finish before the first hard freeze locks the ground.` },
+        { q: 'How much does a seasonal cleanup cost?', a: `We quote every cleanup individually based on your yard size and the amount of debris. Text us your ${city} address at 801-669-3819 and we'll get you a price quickly - usually same day.` },
+        { q: 'Do I need to be a regular mowing customer to get a cleanup?', a: `No. Seasonal cleanups are available to any ${city} homeowner in our service area. Many cleanup clients become regular mowing customers, but it's not required.` },
+      ],
+    },
+  ];
+
+  const paths = [];
+  for (const city of cities) {
+    for (const service of services) {
+      paths.push({
+        params: { city: city.slug, service: service.slug },
+        props: { city, service },
+      });
+    }
+  }
+  return paths;
+}
+
+const { city, service } = Astro.props;
+const { image: serviceImage } = service;
+const canonicalUrl = `${site.url}/${city.slug}/${service.slug}`;
+
+const metaTitle = `${service.serviceName} in ${city.name}, UT | Duck Duck Mow`;
+const metaDesc = `Professional ${service.name.toLowerCase()} in ${city.name}, Utah. Duck Duck Mow serves all ${city.name} neighborhoods with reliable, detail-focused lawn care. Free quotes, starting at $35/visit.`;
+const keywords = `${service.name.toLowerCase()} ${city.name} UT, ${service.name.toLowerCase()} ${city.name} Utah, lawn care ${city.name}, ${service.slug} service ${city.zip}`;
+
+const intro = service.intro(city.name, city.cityDesc);
+const bodyParas = service.body(city.name, city.lotNote, city.seasonal);
+const features = service.features(city.name);
+const faqs = service.faqs(city.name);
+
+const otherServices = [
+  { label: 'Lawn Mowing', slug: 'lawn-mowing' },
+  { label: 'Edging', slug: 'edging' },
+  { label: 'Trimming', slug: 'trimming' },
+  { label: 'Lawn Blowing', slug: 'lawn-blowing' },
+  { label: 'Seasonal Cleanup', slug: 'seasonal-cleanup' },
+].filter(s => s.slug !== service.slug);
+
+const otherCities = [
+  { label: 'Herriman', slug: 'herriman-lawn-care' },
+  { label: 'Riverton', slug: 'riverton-lawn-care' },
+  { label: 'South Jordan', slug: 'south-jordan-lawn-care' },
+  { label: 'Bluffdale', slug: 'bluffdale-lawn-care' },
+].filter(c => c.slug !== city.slug);
+
+const localSchema = {
+  '@type': 'Service',
+  name: `${service.serviceName} in ${city.name}, UT`,
+  provider: {
+    '@type': ['LawnCareService', 'LocalBusiness'],
+    name: 'Duck Duck Mow',
+    telephone: site.business.telephone,
+    url: site.url,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: city.name,
+      addressRegion: 'UT',
+      postalCode: city.zip,
+      addressCountry: 'US',
+    },
+  },
+  areaServed: {
+    '@type': 'City',
+    name: city.name,
+    containedInPlace: { '@type': 'State', name: 'Utah' },
+  },
+  description: metaDesc,
+};
+
+const faqSchema = {
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<BaseLayout
+  title={metaTitle}
+  noSuffix
+  description={metaDesc}
+  keywords={keywords}
+  canonical={canonicalUrl}
+  breadcrumbs={[
+    { name: 'Home', url: site.url },
+    { name: `${city.name} Lawn Care`, url: `${site.url}/${city.slug}` },
+    { name: service.serviceName, url: canonicalUrl },
+  ]}
+  schema={[localSchema, faqSchema]}
+>
+  <Nav />
+  <main class="pt-16 lg:pt-20">
+
+    <!-- Hero -->
+    <section class="relative pt-16 pb-20 sm:pt-24 sm:pb-28 overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-green-50/80 via-white to-emerald-50/40"></div>
+      <div class="container mx-auto px-4 relative z-10 max-w-4xl">
+        <div class="fade-in">
+          <div class="flex items-center gap-2 mb-4 text-sm">
+            <a href={`/${city.slug}`} class="text-green-700 hover:text-green-800 font-medium">{city.name} Lawn Care</a>
+            <span class="text-gray-300">/</span>
+            <span class="text-gray-500">{service.serviceName}</span>
+          </div>
+          <span class="inline-block px-4 py-1.5 bg-green-50 text-green-800 text-sm font-semibold rounded-full mb-4">
+            {city.name}, UT {city.zip}
+          </span>
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 mb-6 leading-tight font-display">
+            {service.serviceName} in <span class="text-green-800">{city.name}, Utah</span>
+          </h1>
+          <p class="text-xl text-gray-500 mb-8 max-w-2xl leading-relaxed">{intro}</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="#quote" class="inline-flex items-center gap-2 px-8 py-4 bg-green-600 text-white font-bold rounded-full hover:bg-green-700 transition-all shadow-lg shadow-green-600/25 text-base">
+              Get a Free Quote
+            </a>
+            <a href={PHONE_HREF} class="inline-flex items-center gap-2 px-8 py-4 bg-white text-green-800 font-bold rounded-full border-2 border-green-200 hover:border-green-400 transition-all text-base">
+              Call {PHONE_DISPLAY}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Body copy -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start fade-in mb-12">
+          <div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6 font-display">
+              {service.serviceName} <span class="text-green-800">{city.name} Homeowners Can Count On</span>
+            </h2>
+            {bodyParas.map((para) => (
+              <p class="text-gray-500 leading-relaxed mb-4">{para}</p>
+            ))}
+          </div>
+          <div class="rounded-2xl overflow-hidden shadow-lg">
+            <img
+              src={serviceImage}
+              alt={`${service.serviceName} service in ${city.name}, Utah - Duck Duck Mow`}
+              class="w-full h-72 object-cover"
+              loading="lazy"
+              width="600"
+              height="400"
+            />
+          </div>
+        </div>
+
+        <!-- Features -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 fade-in">
+          {features.map(({ title, desc }) => (
+            <div class="p-6 rounded-2xl bg-green-50 border border-green-100">
+              <div class="flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center flex-shrink-0">
+                  <svg class="w-5 h-5 text-green-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="font-bold text-gray-900 mb-1">{title}</h3>
+                  <p class="text-sm text-gray-500 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Other services in this city -->
+    <section class="py-12 bg-gradient-to-br from-green-50/40 to-white">
+      <div class="container mx-auto px-4 max-w-4xl fade-in">
+        <h2 class="text-xl font-extrabold text-gray-900 mb-6">
+          More Lawn Care Services in {city.name}
+        </h2>
+        <div class="flex flex-wrap gap-3">
+          {otherServices.map(({ label, slug }) => (
+            <a
+              href={`/${city.slug}/${slug}`}
+              class="px-5 py-2.5 rounded-full border-2 border-green-200 text-green-800 text-sm font-semibold hover:bg-green-50 hover:border-green-400 transition-all"
+            >
+              {label} in {city.name}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Same service in other cities -->
+    <section class="py-12 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-4 max-w-4xl fade-in">
+        <h2 class="text-xl font-extrabold text-gray-900 mb-6">
+          {service.serviceName} in Other Service Areas
+        </h2>
+        <div class="flex flex-wrap gap-3">
+          {otherCities.map(({ label, slug }) => (
+            <a
+              href={`/${slug}/${service.slug}`}
+              class="px-5 py-2.5 rounded-full border-2 border-gray-200 text-gray-700 text-sm font-semibold hover:bg-gray-50 hover:border-gray-400 transition-all"
+            >
+              {service.serviceName} in {label}
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="py-16 sm:py-20 bg-white">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-900 text-center mb-10 font-display fade-in">
+          {service.serviceName} in {city.name} - <span class="text-green-800">FAQ</span>
+        </h2>
+        <div class="space-y-3">
+          {faqs.map(({ q, a }) => (
+            <div class="faq-item border border-gray-200 rounded-2xl overflow-hidden hover:border-green-200 transition-colors fade-in">
+              <button class="faq-trigger w-full text-left px-6 py-5 flex items-center justify-between gap-4 font-semibold text-gray-900" aria-expanded="false">
+                <span>{q}</span>
+                <svg class="faq-icon w-5 h-5 text-green-800 flex-shrink-0 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="faq-answer hidden px-6 pb-5">
+                <p class="text-gray-500 leading-relaxed text-sm">{a}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Quote form -->
+    <section id="quote" class="py-20 sm:py-28 bg-gradient-to-b from-white to-green-50/30">
+      <div class="container mx-auto px-4 max-w-3xl">
+        <div class="text-center mb-12 fade-in">
+          <span class="inline-block px-4 py-1.5 bg-green-50 text-green-800 text-sm font-semibold rounded-full mb-4">
+            Free Quote - {city.name}, UT
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3 font-display">
+            Get Your Free <span class="text-green-800">{service.serviceName} Quote</span>
+          </h2>
+          <p class="text-gray-500 text-lg">We'll respond same day.</p>
+        </div>
+        <div class="fade-in">
+          <QuoteForm
+            endpoint={forms.quoteEndpoint}
+            defaultNeighborhood={city.name}
+            defaultServices={[service.precheck]}
+            client:load
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom CTA -->
+    <section class="py-14 bg-gradient-to-br from-green-600 to-emerald-700 text-white text-center">
+      <div class="container mx-auto px-4 fade-in">
+        <p class="text-white/80 text-lg font-medium mb-4">Questions? Just text or call us.</p>
+        <a href={PHONE_HREF} class="inline-flex items-center justify-center gap-3 px-10 py-4 bg-white text-green-800 font-bold rounded-full hover:bg-green-50 transition-all shadow-2xl hover:scale-105 text-xl">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 8V5z" />
+          </svg>
+          Call or Text {PHONE_DISPLAY}
+        </a>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach((item) => {
+    const trigger = item.querySelector('.faq-trigger')!;
+    const answer  = item.querySelector('.faq-answer')!;
+    const icon    = item.querySelector('.faq-icon')!;
+    trigger.addEventListener('click', () => {
+      const isOpen = !answer.classList.contains('hidden');
+      answer.classList.toggle('hidden', isOpen);
+      icon.classList.toggle('rotate-180', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+</script>

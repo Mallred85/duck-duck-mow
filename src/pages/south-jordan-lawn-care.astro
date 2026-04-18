@@ -6,6 +6,8 @@ import QuoteForm from '@/components/QuoteForm.tsx';
 import { forms } from '@/config/forms';
 import { PHONE_DISPLAY, PHONE_HREF, site } from '@/config/site';
 
+const CITY_MAP = '/images/map-south-jordan.webp';
+
 const city = 'South Jordan';
 const zip = '84009';
 const slug = 'south-jordan-lawn-care';
@@ -102,7 +104,8 @@ const faqs = [
     <!-- Body Content -->
     <section class="py-16 sm:py-20 bg-white">
       <div class="container mx-auto px-4 max-w-4xl">
-        <div class="fade-in mb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start fade-in mb-12">
+          <div>
           <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 font-display">
             South Jordan's <span class="text-green-800">Detail-First Lawn Crew</span>
           </h2>
@@ -124,6 +127,11 @@ const faqs = [
           </p>
         </div>
 
+        </div>
+          <div class="rounded-2xl overflow-hidden shadow-lg border border-gray-100">
+            <img src={CITY_MAP} alt="Map of South Jordan Utah lawn care service area" class="w-full object-cover" loading="lazy" width="600" height="600" />
+          </div>
+        </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 fade-in">
           {[
             { label: 'Daybreak Specialists', sub: 'We know HOA standards inside and out' },
@@ -193,6 +201,20 @@ const faqs = [
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services in this city -->
+    <section class="py-12 bg-white border-t border-gray-100">
+      <div class="container mx-auto px-4 max-w-4xl fade-in">
+        <h2 class="text-xl font-extrabold text-gray-900 mb-6">Lawn Care Services in South Jordan</h2>
+        <div class="flex flex-wrap gap-3">
+          <a href="/south-jordan-lawn-care/lawn-mowing" class="px-5 py-2.5 rounded-full border-2 border-green-200 text-green-800 text-sm font-semibold hover:bg-green-50 hover:border-green-400 transition-all">Lawn Mowing</a>
+          <a href="/south-jordan-lawn-care/edging" class="px-5 py-2.5 rounded-full border-2 border-green-200 text-green-800 text-sm font-semibold hover:bg-green-50 hover:border-green-400 transition-all">Edging</a>
+          <a href="/south-jordan-lawn-care/trimming" class="px-5 py-2.5 rounded-full border-2 border-green-200 text-green-800 text-sm font-semibold hover:bg-green-50 hover:border-green-400 transition-all">Trimming</a>
+          <a href="/south-jordan-lawn-care/lawn-blowing" class="px-5 py-2.5 rounded-full border-2 border-green-200 text-green-800 text-sm font-semibold hover:bg-green-50 hover:border-green-400 transition-all">Lawn Blowing</a>
+          <a href="/south-jordan-lawn-care/seasonal-cleanup" class="px-5 py-2.5 rounded-full border-2 border-green-200 text-green-800 text-sm font-semibold hover:bg-green-50 hover:border-green-400 transition-all">Seasonal Cleanup</a>
         </div>
       </div>
     </section>
