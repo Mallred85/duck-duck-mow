@@ -5,9 +5,7 @@
  * Emits only the tracking scripts whose IDs are configured in
  * src/config/analytics.ts. Empty IDs produce zero output.
  *
- * All third-party scripts use type="text/partytown" so they run
- * in a Web Worker via @astrojs/partytown - keeping the main
- * thread free and protecting Core Web Vitals scores.
+ * Scripts load normally on the main thread (no Partytown).
  *
  * Usage in BaseLayout.astro:
  *   <Analytics slot="head" />   ← inside <head>
@@ -39,9 +37,9 @@ const { slot = 'head' } = Astro.props;
       <meta name="google-site-verification" content={googleSiteVerification} />
     )}
 
-    {/* Google Tag Manager - runs in Web Worker via Partytown */}
+    {/* Google Tag Manager */}
     {gtmContainerId && (
-      <script type="text/partytown" define:vars={{ gtmContainerId }}>
+      <script define:vars={{ gtmContainerId }}>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
         j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -55,11 +53,10 @@ const { slot = 'head' } = Astro.props;
     {ga4MeasurementId && !gtmContainerId && (
       <>
         <script
-          type="text/partytown"
           async
           src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}
         ></script>
-        <script type="text/partytown" define:vars={{ ga4MeasurementId }}>
+        <script define:vars={{ ga4MeasurementId }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
@@ -70,7 +67,7 @@ const { slot = 'head' } = Astro.props;
 
     {/* Meta (Facebook) Pixel */}
     {metaPixelId && (
-      <script type="text/partytown" define:vars={{ metaPixelId }}>
+      <script define:vars={{ metaPixelId }}>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -86,7 +83,7 @@ const { slot = 'head' } = Astro.props;
 
     {/* Microsoft Clarity */}
     {clarityProjectId && (
-      <script type="text/partytown" define:vars={{ clarityProjectId }}>
+      <script define:vars={{ clarityProjectId }}>
         (function(c,l,a,r,i,t,y){
           c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
           t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
